@@ -1,4 +1,4 @@
-package com.example.implmentation.Models.AllocationManager;
+package com.example.implmentation.Models.Categories;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AllocationManager {
+public class Categories {
     private Long id;
-    private String type;
-    private String status;
+    private String name;
+    private String description;
 }

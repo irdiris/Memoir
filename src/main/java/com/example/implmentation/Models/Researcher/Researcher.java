@@ -1,4 +1,4 @@
-package com.example.implmentation.Models.AllocationManager;
+package com.example.implmentation.Models.Researcher;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AllocationManager {
+public class Researcher {
     private Long id;
     private String type;
-    private String status;
+    private String rank;
+    private String position;
+    private String facility;
 }
