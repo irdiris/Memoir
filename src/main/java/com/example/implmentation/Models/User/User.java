@@ -45,7 +45,7 @@ public class User {
     @OneToOne(mappedBy = "user")
 
     private InventoryManager  inventoryManager;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "userId")
     private Set<EquipmentRequests> equipmentRequests;
 
 

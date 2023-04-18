@@ -17,16 +17,16 @@ import java.util.Set;
 @Entity
 @Table(name = "Student")
 public class Student {
-
+    @Id
+    private  Long id;
     private String specialty;
     private String level;
     private String type;
     private String institution;
 
-    @OneToOne(optional = false)
-    @MapsId
-    @Id
+    @OneToOne( cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JoinColumn(name = "id",referencedColumnName = "id")
+    @MapsId
     private User user;
 
 }

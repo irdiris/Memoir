@@ -19,9 +19,11 @@ import java.util.Set;
 public class Researcher {
   @OneToOne(optional = false)
   @MapsId
-  @Id
+
   @JoinColumn(name = "id",referencedColumnName = "id")
   private User user;
+  @Id
+  private Long id;
     private String type;
     @Column(name = "grade")
     private String rank;

@@ -16,17 +16,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "EquipmentRequests")
-
+@IdClass(EquipmentRequestsID.class )
 public class EquipmentRequests {
    @ManyToOne
    @Id
    @MapsId("id")
    @JoinColumn(name = "userId", foreignKey = @ForeignKey(name = "fk_user"))
-   private User user;
+   private User userId;
     @ManyToOne
     @Id
     @JoinColumn(name = "itemId",foreignKey = @ForeignKey(name = "fk_item"), referencedColumnName = "serialNumber")
-    private Items items;
+    private Items itemId;
     private String userType;
     private String dateOfAcquisition;
     private String dateOfReturn;
