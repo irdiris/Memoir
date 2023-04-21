@@ -36,7 +36,7 @@ EquipmentRequests equipmentRequests= EquipmentRequests.builder()
         .userId(User.builder().id(5L).build())
         .build();
 
-        allocationManagerService.refuseEquipmentRequest(5L);
+     //   allocationManagerService.refuseEquipmentRequest(5L);
         }
     }
 

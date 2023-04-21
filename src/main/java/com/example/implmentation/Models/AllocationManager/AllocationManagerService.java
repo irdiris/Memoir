@@ -2,6 +2,8 @@ package com.example.implmentation.Models.AllocationManager;
 
 import com.example.implmentation.Models.EquipmentRequests.EquipmentRequests;
 import com.example.implmentation.Models.EquipmentRequests.EquipmentRequestsRepository;
+import com.example.implmentation.Models.Notifications.NotificationRepository;
+import com.example.implmentation.Models.Notifications.Notifications;
 import com.example.implmentation.Models.Researcher.Researcher;
 import com.example.implmentation.Models.Researcher.ResearcherRepository;
 import com.example.implmentation.Models.Student.Student;
@@ -17,20 +19,41 @@ public class AllocationManagerService {
     private final StudentRepository studentRepository;
     private final ResearcherRepository researcherRepository;
     private  final EquipmentRequestsRepository equipmentRequestsRepository;
+    private final NotificationRepository notificationRepository;
+    private final AllocationManagerRepository allocationManagerRepository;
 
 
     @Autowired
-    public AllocationManagerService(StudentRepository studentRepository, ResearcherRepository researcherRepository, EquipmentRequestsRepository equipmentRequestsRepository) {
+    public AllocationManagerService(StudentRepository studentRepository, ResearcherRepository researcherRepository, EquipmentRequestsRepository equipmentRequestsRepository, NotificationRepository notificationRepository, AllocationManager allocationManager, AllocationManagerRepository allocationManagerRepository) {
         this.studentRepository = studentRepository;
         this.researcherRepository = researcherRepository;
         this.equipmentRequestsRepository = equipmentRequestsRepository;
+        this.notificationRepository = notificationRepository;
+
+        this.allocationManagerRepository = allocationManagerRepository;
     }
 
-    public void refuseEquipmentRequest (Long id){
-       equipmentRequestsRepository.deleteRequestByUserId(id);
-
+    public List<EquipmentRequests> returnAllEquipmentRequests(){
+        List<EquipmentRequests> equipmentRequestsList=
+        equipmentRequestsRepository.findAll();
+        return  equipmentRequestsList;
     }
-
+    public void refuseEquipmentRequest (EquipmentRequests equipmentRequests){
+       equipmentRequestsRepository.deleteRequestByUserId(equipmentRequests.getUserId().getId(), equipmentRequests.getItemId().getSerialNumber());
+        Notifications notifications = Notifications.builder()
+                .notificationText("Your request for for item "+equipmentRequests.getItemId().getSerialNumber()+" has been denied.")
+                .user(equipmentRequests.getUserId())
+                .build();
+    }
+ public void acceptEquipmentRequest(EquipmentRequests equipmentRequests){
+        Optional<EquipmentRequests> equipmentRequestaPending= equipmentRequestsRepository.findByUserId(equipmentRequests.getUserId().getId());
+        equipmentRequestaPending.get().setState("Allocated");
+        equipmentRequestsRepository.save(equipmentRequestaPending.get());
+     Notifications notifications = Notifications.builder()
+             .notificationText("Your request for for item "+equipmentRequests.getItemId().getSerialNumber()+" has been approved. Head to the allocation service as soon as possible.")
+             .user(equipmentRequests.getUserId())
+             .build();
+ }
     public void deleteStudent(int id) {
         studentRepository.deleteById((long) id);
     }
@@ -40,20 +63,15 @@ public class AllocationManagerService {
         return studentList;
     }
 
-    public void updateStudent(Student student) {
+    public void banStudent(Student student) {
         Optional<Student> studentOld = studentRepository.findById(student.getId());
-        studentOld.get().setInstitution(student.getInstitution());
-        studentOld.get().setLevel(student.getLevel());
-        studentOld.get().setSpecialty(student.getSpecialty());
-        studentOld.get().getUser().setFirstName(student.getUser().getFirstName());
-        studentOld.get().getUser().setLastName(student.getUser().getLastName());
-        studentOld.get().getUser().setAdress(student.getUser().getAdress());
-        studentOld.get().getUser().setEmail(student.getUser().getEmail());
-        studentOld.get().getUser().setBirthDate(student.getUser().getBirthDate());
-        studentOld.get().getUser().setGender(student.getUser().getGender());
-        studentOld.get().getUser().setPhone(student.getUser().getPhone());
-        studentOld.get().getUser().setUsername(student.getUser().getUsername());
-        studentOld.get().getUser().setPassword(student.getUser().getPassword());
+        studentOld.get().getUser().setState("Banned");
+        studentRepository.save(studentOld.get());
+
+    }
+    public void unbanStudent(Student student) {
+        Optional<Student> studentOld = studentRepository.findById(student.getId());
+        studentOld.get().getUser().setState("Active");
         studentRepository.save(studentOld.get());
 
     }
@@ -69,22 +87,26 @@ public class AllocationManagerService {
         return researcherList;
     }
 
-    public void updateResearcher(Researcher researcher) {
+    public void banResearcher(Researcher researcher) {
         Optional<Researcher> researcherOld = researcherRepository.findById(researcher.getId());
-        researcherOld.get().setFacility(researcher.getFacility());
-        researcherOld.get().setRank(researcher.getRank());
-        researcherOld.get().setPosition(researcher.getPosition());
-        researcherOld.get().getUser().setFirstName(researcher.getUser().getFirstName());
-        researcherOld.get().getUser().setLastName(researcher.getUser().getLastName());
-        researcherOld.get().getUser().setAdress(researcher.getUser().getAdress());
-        researcherOld.get().getUser().setEmail(researcher.getUser().getEmail());
-        researcherOld.get().getUser().setBirthDate(researcher.getUser().getBirthDate());
-        researcherOld.get().getUser().setGender(researcher.getUser().getGender());
-        researcherOld.get().getUser().setPhone(researcher.getUser().getPhone());
-        researcherOld.get().getUser().setUsername(researcher.getUser().getUsername());
-        researcherOld.get().getUser().setPassword(researcher.getUser().getPassword());
+        researcherOld.get().getUser().setState("Banned");
         researcherRepository.save(researcherOld.get());
     }
-
+    public void unbanResearcher(Researcher researcher) {
+        Optional<Researcher> researcherOld = researcherRepository.findById(researcher.getId());
+        researcherOld.get().getUser().setState("Banned");
+        researcherRepository.save(researcherOld.get());
+    }
+   public void updateProfile (AllocationManager allocationManager){
+        Optional<AllocationManager> allocationManagerOld = allocationManagerRepository.findById(allocationManager.getId());
+        allocationManagerOld.get().getUser().setPassword(allocationManager.getUser().getPassword());
+       allocationManagerOld.get().getUser().setAdress(allocationManager.getUser().getAdress());
+       allocationManagerOld.get().getUser().setEmail(allocationManager.getUser().getEmail());
+       allocationManagerOld.get().getUser().setFirstName(allocationManager.getUser().getFirstName());
+       allocationManagerOld.get().getUser().setLastName(allocationManager.getUser().getLastName());
+       allocationManagerOld.get().getUser().setPhone(allocationManager.getUser().getPhone());
+       allocationManagerOld.get().getUser().setUsername(allocationManager.getUser().getUsername());
+       allocationManagerOld.get().setStatus(allocationManager.getStatus());
+   }
 }
 

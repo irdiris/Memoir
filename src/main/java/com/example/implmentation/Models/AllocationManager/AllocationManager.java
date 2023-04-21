@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "AllocationManager")
 public class AllocationManager {
+    @Id
+    private Long id;
     @OneToOne(optional = false)
     @MapsId
-    @Id
     @JoinColumn(name = "id",referencedColumnName = "id")
     private User user;
     private String type;

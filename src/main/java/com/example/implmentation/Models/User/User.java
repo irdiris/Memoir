@@ -32,6 +32,7 @@ public class User {
     private String email;
     private String password;
     private String type;
+    private String  state;
 
     @OneToOne(mappedBy = "user")
 

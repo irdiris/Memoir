@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "HPCRequests")
+@IdClass(HPCRequestsId.class)
 public class HPCRequests {
     @ManyToOne
     @Id
