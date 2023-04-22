@@ -14,8 +14,8 @@ public interface EquipmentRequestsRepository extends JpaRepository<EquipmentRequ
     @Modifying
     @Transactional
     @Query( value = "delete from equipment_requests where user_id = :userId and item_id = :itemId",nativeQuery = true)
-    void deleteRequestByUserId(@Param("userId") Long userId, @Param("itemId") String itemId);
-   @Query( value = "update ",nativeQuery = true)
-    Optional<EquipmentRequests> findByUserId(@Param("id") Long id);
+    void deleteRequestByUserIdandItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
+   @Query( value = "select state from equipment_requests where item_id =:itemId and  user_id= :userId",nativeQuery = true)
+    Optional<EquipmentRequests> findStateByUserIdAndItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
 }
 

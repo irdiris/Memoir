@@ -2,6 +2,10 @@ package com.example.implmentation.Models.AllocationManager;
 
 import com.example.implmentation.Models.EquipmentRequests.EquipmentRequests;
 import com.example.implmentation.Models.EquipmentRequests.EquipmentRequestsRepository;
+import com.example.implmentation.Models.HPCRequests.HPCRequests;
+import com.example.implmentation.Models.HPCRequests.HPCRequestsRepository;
+import com.example.implmentation.Models.HPCSchedule.HPCSchedule;
+import com.example.implmentation.Models.HPCSchedule.HPCScheduleRepository;
 import com.example.implmentation.Models.Notifications.NotificationRepository;
 import com.example.implmentation.Models.Notifications.Notifications;
 import com.example.implmentation.Models.Researcher.Researcher;
@@ -21,16 +25,19 @@ public class AllocationManagerService {
     private  final EquipmentRequestsRepository equipmentRequestsRepository;
     private final NotificationRepository notificationRepository;
     private final AllocationManagerRepository allocationManagerRepository;
+    private final HPCRequestsRepository hpcRequestsRepository;
+    private final HPCScheduleRepository hpcScheduleRepository;
 
 
     @Autowired
-    public AllocationManagerService(StudentRepository studentRepository, ResearcherRepository researcherRepository, EquipmentRequestsRepository equipmentRequestsRepository, NotificationRepository notificationRepository, AllocationManager allocationManager, AllocationManagerRepository allocationManagerRepository) {
+    public AllocationManagerService(StudentRepository studentRepository, ResearcherRepository researcherRepository, EquipmentRequestsRepository equipmentRequestsRepository, NotificationRepository notificationRepository, AllocationManagerRepository allocationManagerRepository, HPCRequestsRepository hpcRequestsRepository, HPCScheduleRepository hpcScheduleRepository) {
         this.studentRepository = studentRepository;
         this.researcherRepository = researcherRepository;
         this.equipmentRequestsRepository = equipmentRequestsRepository;
         this.notificationRepository = notificationRepository;
-
         this.allocationManagerRepository = allocationManagerRepository;
+        this.hpcRequestsRepository = hpcRequestsRepository;
+        this.hpcScheduleRepository = hpcScheduleRepository;
     }
 
     public List<EquipmentRequests> returnAllEquipmentRequests(){
@@ -39,20 +46,22 @@ public class AllocationManagerService {
         return  equipmentRequestsList;
     }
     public void refuseEquipmentRequest (EquipmentRequests equipmentRequests){
-       equipmentRequestsRepository.deleteRequestByUserId(equipmentRequests.getUserId().getId(), equipmentRequests.getItemId().getSerialNumber());
+       equipmentRequestsRepository.deleteRequestByUserIdandItemId(equipmentRequests.getUserId().getId(), equipmentRequests.getItemId().getSerialNumber());
         Notifications notifications = Notifications.builder()
                 .notificationText("Your request for for item "+equipmentRequests.getItemId().getSerialNumber()+" has been denied.")
                 .user(equipmentRequests.getUserId())
                 .build();
+        notificationRepository.save(notifications);
     }
  public void acceptEquipmentRequest(EquipmentRequests equipmentRequests){
-        Optional<EquipmentRequests> equipmentRequestaPending= equipmentRequestsRepository.findByUserId(equipmentRequests.getUserId().getId());
+        Optional<EquipmentRequests> equipmentRequestaPending= equipmentRequestsRepository.findStateByUserIdAndItemId(equipmentRequests.getUserId().getId(),equipmentRequests.getItemId().getSerialNumber());
         equipmentRequestaPending.get().setState("Allocated");
         equipmentRequestsRepository.save(equipmentRequestaPending.get());
      Notifications notifications = Notifications.builder()
              .notificationText("Your request for for item "+equipmentRequests.getItemId().getSerialNumber()+" has been approved. Head to the allocation service as soon as possible.")
              .user(equipmentRequests.getUserId())
              .build();
+     notificationRepository.save(notifications);
  }
     public void deleteStudent(int id) {
         studentRepository.deleteById((long) id);
@@ -107,6 +116,36 @@ public class AllocationManagerService {
        allocationManagerOld.get().getUser().setPhone(allocationManager.getUser().getPhone());
        allocationManagerOld.get().getUser().setUsername(allocationManager.getUser().getUsername());
        allocationManagerOld.get().setStatus(allocationManager.getStatus());
+   }
+
+   private List<HPCSchedule> returnHPCSchedule(){
+        List<HPCSchedule> hpcScheduleList = hpcScheduleRepository.findAll();
+       return hpcScheduleList;
+   }
+   private void refuseHPCRequest(HPCRequests hpcRequests){
+        hpcRequestsRepository.deleteRequestByUserIdAndItemId(hpcRequests.getResearcher().getId(), hpcRequests.getItem().getSerialNumber());
+       Notifications notifications = Notifications.builder()
+               .notificationText("Your request for for item "+hpcRequests.getItem().getSerialNumber()+" has been denied.")
+               .user(hpcRequests.getResearcher().getUser())
+               .build();
+       notificationRepository.save(notifications);
+   }
+   private void acceptHPCRequest(HPCRequests hpcRequests){
+       hpcRequestsRepository.deleteRequestByUserIdAndItemId(hpcRequests.getResearcher().getId(), hpcRequests.getItem().getSerialNumber());
+       HPCSchedule hpcSchedule= HPCSchedule.builder()
+               .dateOfAcquisition(hpcRequests.getDateOfAcquisition())
+               .dateOfReturn(hpcRequests.getDateOfReturn())
+               .hours(hpcRequests.getHours())
+               .items(hpcRequests.getItem())
+               .researcher(hpcRequests.getResearcher())
+               .state("Allocated")
+               .build();
+       hpcScheduleRepository.save(hpcSchedule);
+       Notifications notifications = Notifications.builder()
+               .notificationText("Your request for for item "+hpcRequests.getItem().getSerialNumber()+" has been accepted. you are free to use it at the assigned hours.")
+               .user(hpcRequests.getResearcher().getUser())
+               .build();
+       notificationRepository.save(notifications);
    }
 }
 
