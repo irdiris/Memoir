@@ -7,5 +7,5 @@ import java.io.Serializable;
 
 public class HPCScheduleId implements Serializable {
     private Researcher researcher;
-    private Items item;
+    private Items items;
 }

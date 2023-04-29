@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <!-- icons link-->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">        
+   
+	 <!-- custom css link-->
+	<link rel="stylesheet" href="../static/css/style.css">
+	<title>Manage work personnel</title>
+</head>
+<body>
+	
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
+		<ul class="side-menu">
+			<li><a href="Admin-InventoryState.html" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
+			
+			<li><a href="Admin-ManageManagers.html"><i class="bi bi-person-gear icon"></i> Manage Work Personnel </i></a></li>
+			<li><a href="Admin-ManageEquipmentCategories.html"><i class='bx bx-devices icon'></i> Manage Equipment <br>Categories</a></li>
+	    </ul>
+		
+	</section>
+	
+
+	<!-- NAVBAR -->
+	<section id="content">
+		<nav>
+			<i class='bx bx-menu toggle-sidebar' ></i>
+			<form action="#"></form>
+			<div id="toggle-btn" class="fas fa-sun"></div>
+			<div class="notif">
+				<i class="bi bi-bell-fill nav icon" id="bell"></i>
+				<ul class="notif-link">
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<hr>
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>    
+					<hr>
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>   
+					<hr>
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>    
+				</ul>
+			</div>
+		
+			<span class="divider"></span>
+			<div class="profile">
+				<img src="../static/css/images/teacher2.jpg" alt="">
+				<ul class="profile-link">
+					<li><a href="Admin-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
+					<li><a href="Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	
+		
+
+		<!-- MAIN -->
+		<main>
+			<h1 class="title">Manage Work Personnel</h1>
+			<ul class="snippet">
+				<li><a href="#">Home</a></li>
+				<li class="divider">/</li>
+				<li><a href="#" class="active"> Manage Work Personnel</a></li></ul>
+			<div class="data">
+				<div class="content-data">
+
+					<!-- data table -->
+					
+					<div class="head">
+						<h3>Work Personnel Details</h3>
+						</div>
+						<input type="checkbox" id="show">
+                       <label for="show" class="show-btn">Add</label> 
+                        <div class="container" id="container-scrl">
+						<label for="show" class="close-btn" title="close">×</label>
+						<h1>Add Manager</h1>
+						<form action="#">
+							<div id="form">
+							<label>ID</label>
+							<input type="text">
+							<label>Username</label>
+							<input type="text">
+							<label>First name</label>
+							<input type="text">
+							<label>Last name</label>
+							<input type="text">
+							<label>Gender</label>
+							<input type="text">
+                            <label>Birth-date</label>
+                            <input type="text">
+							<label>Adress</label>
+                            <input type="text">
+                            <label>Phone</label>
+                            <input type="text">
+                            <label>Email</label>
+                            <input type="text">
+                            <label>Type</label>
+                            <input type="text">
+							<label>State</label>
+                            <input type="text">
+							<label>Status</label>
+                            <input type="text">
+			                <label>Password</label>
+                            <input type="password">
+							</div>
+							<button>Save</button> 
+							
+							
+						<closeform></closeform></form>
+					</div> 
+					<div class="table-wrapper">
+						<table class="fl-table">
+							
+							
+							<thead>
+							<tr>
+								<th>ID</th>
+								<th>First name</th>
+								<th>Last name</th>
+								<th>Email</th>
+								<th>Type</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>#</td>
+								<td>Content 1</td>
+								<td>Content 1</td>
+								<td>Content 1</td>
+								<td>Content 1</td>
+								<td>Content 1</td>
+								<td>
+								   <div>
+									<a  href="Update-Manager.html"><i class='bx bx-edit-alt'></i></a>
+									<a  href="#"><i class='bx bx-trash'></i></a> 
+								   </div>
+							    </td>
+								
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>Content 2</td>
+								<td>Content 2</td>
+								<td>Content 2</td>
+								<td>Content 2</td>
+								<td>Content 2</td>
+								<td>
+									<div>
+										<a href="Update-Manager.html" target="_blank"><i class='bx bx-edit-alt'></i></a>
+										<a  href="#"><i class='bx bx-trash'></i></a> 
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>Content 3</td>
+								<td>Content 3</td>
+								<td>Content 3</td>
+								<td>Content 3</td>
+								<td>Content 3</td>
+								<td>
+									<div>
+										<a href="Update-Manager.html" target="_blank"><i class='bx bx-edit-alt'></i></a>
+										<a  href="#"><i class='bx bx-trash'></i></a> 
+									</div>
+							</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>Content 4</td>
+								<td>Content 4</td>
+								<td>Content 4</td>
+								<td>Content 4</td>
+								<td>Content 4</td>
+								<td>
+									<div>
+										<a href="Update-Manager.html" target="_blank"><i class='bx bx-edit-alt'></i></a>
+										<a  href="#"><i class='bx bx-trash'></i></a> 
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>#</td>
+								<td>Content 5</td>
+								<td>Content 5</td>
+								<td>Content 5</td>
+								<td>Content 5</td>
+								<td>Content 5</td>
+								<td>
+									<div>
+										<a href="Update-Manager.html" target="_blank"><i class='bx bx-edit-alt'></i></a>
+										<a  href="#"><i class='bx bx-trash'></i></a> 
+									</div>
+								</td>
+							</tr>
+							</tr>
+						
+							
+							<tbody>
+						</table>
+
+					</div>
+					
+				</div>
+				
+			
+		</main>
+		
+	</section>
+	
+
+	 <!-- custom js link-->
+	
+	<script src="../static/js/script.js"></script>
+</body>
+</html>

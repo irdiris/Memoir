@@ -25,7 +25,7 @@ public class Items {
     private Categories categories;
     @Id
     private String serialNumber;
-    private String location;
+    private String service;
     private String state;
     private String description;
 
