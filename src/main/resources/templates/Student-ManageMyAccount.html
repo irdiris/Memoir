@@ -9,20 +9,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
 
 	 <!-- custom css link-->
-	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<title>Manage my account</title>
 </head>
 <body>
 	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="logo"><img src="../static/css/images/brain.PNG" class="logo-pic"></i> Smart EMS</a>
+		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
 		<ul class="side-menu">
-			
+			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-menu-dropdown">
+					<li><a href="Student-AllocatedEquipmentHistory.html"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
+					
+				</ul>
+			</li>
 			<li><a href="Student-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment </a></li>
-			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History</a></li>
-			
-			
 			
 		</ul>
 		
@@ -49,7 +51,7 @@
 		
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../static/css/images/student.png" alt="">
+				<img src="css/images/student.png" alt="">
 				<ul class="profile-link">
 					<li><a href="Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
 				</ul>
@@ -65,90 +67,91 @@
 				<li class="divider">/</li>
 				<li><a href="#" class="active"> Manage My Account</a></li>
 			</ul>
-			<div class="data">
-				<div class="content-data">
-				<div id="form-container">
-				        <form  class="display"  >
-					    <div id="left_input"> 
-					   <div class="user-box">
-						   <input type="text" name="id" required="">
-						   <label>ID</label>
-						 </div>
-						 <div class="user-box">
-						   <input type="text" name="firstname" required="">
-						   <label>First name</label>
-						 </div>
-						 <div class="user-box">
-						   <input type="text" name="lastname" required="">
-						   <label>Last name</label>
-						 </div>
-						 <div class="user-box">
-						   <input type="text" name="username" required="">
-						   <label>Username</label>
-						 </div>
-						 <div class="user-box">
-						   <input type="text" name="gender" required="">
-						   <label>Gender</label>
-						 </div>
-						 <div class="user-box">
-							<input type="text" name="birth-date" required="">
-							<label>Birth-date</label>
-						  </div>
-						  <div class="user-box">
-							<input type="text" name="adress" required="">
-							<label>Adress</label>
-						  </div>
-                          <div class="user-box">
-                            <input type="text" name="email" required="">
-                            <label>Email</label>
-                          </div>
-						 
-					   </div>
-					   <div id="right_input"> 
-                        
-                          <div class="user-box">
-                            <input type="text" name="phone" required="">
-                            <label>Phone</label>
-                          </div>
-						<div class="user-box">
-							<input type="text" name="type" required="">
-							<label>Type</label>
-						  </div>
-						  <div class="user-box">
-							<input type="text" name="state" required="">
-							<label>State</label>
-						  </div>
-					  <div class="user-box">
-							<input type="text" name="speciality" required="">
-							<label>Speciality</label>
-						  </div>
-                          <div class="user-box">
-							<input type="text" name="institution" required="">
-							<label>Institution</label>
-						  </div>
-                          <div class="user-box">
-							<input type="text" name="level" required="">
-							<label>Level</label>
-						  </div>
-						 <div class="user-box">
-						   <input type="text" name="password" required="">
-						   <label>Password </label>
-						 </div>
-						 <button class="actbtn" >Save</button>
-						 </div>
-						</form>
-	
+			<div class="content-data">
+			<div class="container1">
+		
+				<form action="#">
+					<div class="form first">
+						<div class="details-personal">
+		
+							<div class="fields">
+								<div class="input-field">
+									<label>ID</label>
+									<input type="text" placeholder="Enter your id" required>
+								</div>
+								<div class="input-field">
+									<label>First Name</label>
+									<input type="text" placeholder="Enter your first name" required>
+								</div>
+								<div class="input-field">
+									<label>Last Name</label>
+									<input type="text" placeholder="Enter your last name" required>
+								</div>
+								<div class="input-field">
+									<label>Date of Birth</label>
+									<input type="date" placeholder="Enter birth date" required>
+								</div>
+		
+								<div class="input-field">
+									<label>Gender</label>
+									<select required>
+										<option disabled selected>Select gender</option>
+										<option>Male</option>
+										<option>Female</option>
+									</select>
+								</div>
+								<div class="input-field">
+									<label>Username</label>
+									<input type="text" placeholder="Enter your username" required>
+								</div>
+								<div class="input-field">
+									<label>Email Adress</label>
+									<input type="text" placeholder="Enter your email adress" required>
+								</div>
+		
+								<div class="input-field">
+									<label>Mobile Number</label>
+									<input type="text" placeholder="Enter mobile number" required>
+								</div>
+		                        <div class="input-field">
+									<label>Adress</label>
+									<input type="text" placeholder="Enter your adress" required>
+								</div>
+								<div class="input-field">
+									<label>Speciality</label>
+									<input type="text" placeholder="Enter your speciality" required>
+								</div>
+								<div class="input-field">
+									<label>Institution</label>
+									<input type="text" placeholder="Enter your level" required>
+								</div>
+								<div class="input-field">
+									<label>Level</label>
+									<input type="text" placeholder="Enter your position" required>
+								</div>
+								<div class="input-field">
+									<label>Password</label>
+									<input type="text" placeholder="Enter your password" required>
+								</div>
+							</div>
+						</div>
+		
+						<button >
+								<span class="btnText">Save</span>
+							</button>
+						</div> 
 					</div>
-					 </div>
-					
-                </div>
-           
+		
+				</form>
+			</div>
+		</div>
 		</main>
 		
 	</section>
 	
 
 	 <!--custom js link-->
-	<script src="../static/js/script.js"></script>
+	<script src="./js/script.js"></script>
+	<script src="./js/script2.js"></script>
 </body>
 </html>

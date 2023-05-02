@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
 
 	 <!-- custom css link-->
-	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<title>Inventory state</title>
 </head>
 <body>
@@ -19,8 +19,10 @@
 		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
 		<ul class="side-menu">
 			<li><a href="InventoryManager-InventoryState.html" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
-			
 			<li><a href="InventoryManager-ManageEquipments.html"><i class='bx bx-devices icon'></i> Manage Equipments</a></li>
+			<li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
+			<li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
+      <li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
 	</section>
 	
 
@@ -42,7 +44,7 @@
 			</div>
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../static/css/images/teacher3.png" alt="">
+				<img src="css/images/teacher3.png" alt="">
 				<ul class="profile-link">
 					<li><a href="InventoryManager-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
 					<li><a href="Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
@@ -62,79 +64,80 @@
 				<li><a href="#" class="active"> Inventory State</a></li>
 				<li ><a href="#" class="report-button">Generate report</a></li>
 			</ul>
-			
-			
+			<div class="info-data">
+				<div class="card">
+					<div class="head">
+						<li>
+							<i class='bx bxs-group' ></i>
+							<span class="text">
+								<h3>965</h3>
+								<p>Students</p>
+							</span>
+						</li>
+				</div>
+				</div>
+				<div class="card">
+					<div class="head">
+						<li>
+							<i class='bx bxs-group' ></i>
+							<span class="text">
+								<h3>70</h3>
+								<p>Researchers</p>
+							</span>
+						</li>
+				</div>
+				</div>
+				<div class="card">
+					<div class="head">
+						<li>
+							<i class='bx bx-devices'></i>
+							<span class="text">
+								<h3>2104</h3>
+								<p>Equipments</p>
+							</span>
+						</li>
+				</div>
+				</div>
+			</div>
 			<div class="data">
 				<div class="content-data">
-					<li>
-						<i class='bx bxs-group' ></i>
-						<span class="text">
-							<h3>70</h3>
-							<p>Researchers</p>
-						</span>
-					</li>
-				</div>
-				<div class="content-data">
-					<li >
-						<i class='bx bxs-group' ></i>
-						<span class="text">
-							<h3>965</h3>
-							<p>Students</p>
-						</span>
-					</li>
-				</div>
-				<div class="content-data">
-					<li>
-						<i class='bx bx-devices'></i>
-						<span class="text">
-							<h3>2104</h3>
-							<p>Equipments</p>
-						</span>
-					</li>
-				</div>
-				
-				<div class="content-data">		
-						<div class="head">
-							<h3>Equipment Availability Status</h3>
-							<div class="menu">
-								<i class='bx bx-dots-horizontal-rounded icon'></i>
-								<ul class="menu-link">
-									<li><a href="#">Save</a></li>
-									<li><a href="#">Remove</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="chart">
-							<div id="chart"></div>
+					<div class="head">
+						<h3>Comparison of Equipment's quantity by category</h3>
+						<div class="menu">
+							<i class='bx bx-dots-horizontal-rounded icon'></i>
+							<ul class="menu-link">
+								<li><a href="#">Save</a></li>
+								<li><a href="#">Remove</a></li>
+							</ul>
 						</div>
 					</div>
-					
-						<div class="content-data">
-							<div class="head">
-								<h3>Equipment State</h3>
-								<div class="menu">
-									<i class='bx bx-dots-horizontal-rounded icon'></i>
-									<ul class="menu-link">
-										<li><a href="#">Save</a></li>
-										<li><a href="#">Remove</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="chart1">
-								<div id="chart1"></div>
-							</div>
+					<div class="chart">
+						<div id="chart"></div>
+					</div>
+				</div>
+				<div class="content-data">
+					<div class="head">
+						<h3>Equipment State</h3>
+						<div class="menu">
+							<i class='bx bx-dots-horizontal-rounded icon'></i>
+							<ul class="menu-link">
+								<li><a href="#">Save</a></li>
+								<li><a href="#">Remove</a></li>
+							</ul>
 						</div>
-			
-			
-			     </div>
-			
+					</div>
+					<div class="chart1" >
+						<div id="chart1"></div>
+					</div>
+				</div>
+			</div>
 		</main>
-		
 	</section>
 	
 
 	 <!--custom js link-->
 	 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../static/js/script.js"></script>
+	<script src="./js/script.js"></script>
+	<script src="./js/script2.js"></script>
 </body>
 </html>

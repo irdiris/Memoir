@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
 
 	 <!-- custom css link-->
-	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<title>Manage students</title>
 </head>
 <body>
@@ -31,16 +31,16 @@
 			<li>
 				<a href="#"><i class='bx bx-devices icon'></i> Manage Requests <i class='bx bx-chevron-right icon-right' ></i></a>
 			<ul class="side-menu-dropdown">
-				<li><a href="AllocationManager-manageEquipmentRequests.html"><i class="bi bi-person icon "></i>Manage<br> Equipement <br> Requests</a></li>
-				<li><a href="AllocationManager-manageHPCRequests.html"><i class="bi bi-person icon "></i>Manage HPC<br> Requests </a></li>
+				<li><a href="AllocationManager-manageEquipmentRequests.html"><i class='bx bx-devices icon'></i>Manage<br> Equipement <br> Requests</a></li>
+				<li><a href="AllocationManager-manageHPCRequests.html"><i class="bi bi-device-ssd icon"></i>Manage HPC<br> Requests </a></li>
 				
 			</ul>
 		    </li>
 			<li>
-				 <a href="#"><i class="bi bi-calendar2-event icon"></i> Review Allocated <br> Equipement<i class='bx bx-chevron-right icon-right' ></i></a>
+				 <a href="#"><i class="bi bi-calendar2-event icon"></i> Review Allocated <br> Equipements<i class='bx bx-chevron-right icon-right' ></i></a>
 			<ul class="side-menu-dropdown">
-				<li><a href="#"><i class="bi bi-person icon "></i>Review<br> Equipement</a></li>
-				<li><a href="#"><i class="bi bi-person icon "></i>Review HPC </a></li>
+				<li><a href="AllocationManager-ReviewEquipment.html"><i class='bx bx-devices icon'></i>Review<br> Equipement</a></li>
+				<li><a href="AllocationManager-ReviewHPC.html"><i class="bi bi-device-ssd icon"></i>Review HPC </a></li>
 				
 			</ul>
 		    </li>
@@ -71,7 +71,7 @@
 		
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../static/css/images/teacher7.png" alt="">
+				<img src="css/images/teacher7.png" alt="">
 				<ul class="profile-link">
 					<li><a href="AllocationManager-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
 					<li><a href="Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
@@ -112,6 +112,7 @@
 								<th>Institution</th>
 								<th>Speciality</th>
 								<th>Level</th>
+								<th>State</th>
 								<th>Action</th>
 							</tr>
 							</thead>
@@ -124,10 +125,11 @@
 								<td>Content 1</td>
 								<td>Content 1</td>
 								<td>Content 1</td>
+								<td>Content 1</td>
 								<td>
 									<div>
-									 <a  href="#" ><i class="bi bi-x-circle" style="color: black;"></i></a>
-									 <a  href="#"><i class='bx bx-trash'style="color: black;"></i></a> 
+										<a href="#" class="table-button3">Ban</a>
+									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
 									</div>
 								 </td>
 							</tr>
@@ -139,10 +141,11 @@
 								<td>Content 2</td>
 								<td>Content 2</td>
 								<td>Content 2</td>
+								<td>Content 2</td>
 								<td>
 									<div>
-									 <a  href="#"><i class="bi bi-x-circle"style="color: black;"></i></a>
-									 <a  href="#"><i class='bx bx-trash'style="color: black;"></i></a> 
+										<a href="#" class="table-button3">Ban</a>
+									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
 									</div>
 								 </td>
 							</tr>
@@ -154,10 +157,11 @@
 								<td>Content 3</td>
 								<td>Content 3</td>
 								<td>Content 3</td>
+								<td>Content 3</td>
 								<td>
 									<div>
-									 <a  href="#"><i class="bi bi-x-circle"style="color: black;"></i></a>
-									 <a  href="#"><i class='bx bx-trash'style="color: black;"></i></a> 
+										<a href="#" class="table-button3">Ban</a>
+										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
 									</div>
 								 </td>
 							</tr>
@@ -169,10 +173,11 @@
 								<td>Content 4</td>
 								<td>Content 4</td>
 								<td>Content 4</td>
+								<td>Content 4</td>
 								<td>
 									<div>
-									 <a  href="#"><i class="bi bi-x-circle"style="color: black;"></i></a>
-									 <a  href="#"><i class='bx bx-trash'style="color: black;"></i></a> 
+										<a href="#" class="table-button3">Ban</a>
+									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
 									</div>
 								 </td>
 							</tr>
@@ -184,10 +189,11 @@
 								<td>Content 5</td>
 								<td>Content 5</td>
 								<td>Content 5</td>
+								<td>Content 5</td>
 								<td>
 									<div>
-									 <a  href="#"><i class="bi bi-x-circle"style="color: black;"></i></a>
-									 <a  href="#"><i class='bx bx-trash'style="color: black;"></i></a> 
+										<a href="#" class="table-button3">Ban</a>
+									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
 									</div>
 								 </td>
 							</tr>
@@ -207,6 +213,7 @@
 	
 
 	 <!--custom js link-->
-	<script src="../static/js/script.js"></script>
+	<script src="./js/script.js"></script>
+	<script src="./js/script2.js"></script>
 </body>
 </html>
