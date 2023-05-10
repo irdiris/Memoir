@@ -1,12 +1,9 @@
 package com.example.implmentation.Security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,37 +15,44 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig  {
-
 private  final CustomFilter customFilter;
+
+@Autowired
+    public SecurityConfig(CustomFilter customFilter, LoginSuccessHandler loginSuccessHandler) {
+        this.customFilter = customFilter;
+    }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws  Exception{
 
     httpSecurity
+
             .csrf()
             .disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
+           .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
-           .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+            .requestMatchers("/templates/Student/**").permitAll()
+            .requestMatchers("/View/**").permitAll()
             .requestMatchers("Implementation/user/**").permitAll()
-            .requestMatchers("/LoginPage").permitAll()
-            .requestMatchers("resources/**").permitAll()
-            .requestMatchers("static/css/**", "static/js/**", "static/css/images/**").permitAll()
+            .requestMatchers("/Pages/**").permitAll()
+            .requestMatchers("/resources/**").permitAll()
+            .requestMatchers("/static/css/**", "static/js/**", "static/css/images/**").permitAll()
             .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/LoginPage")
-            .failureUrl("/Login?error=true")
-            .permitAll();
+        .and()
+                .formLogin()
+                .loginPage("/Pages/LanderPage")
+
+                .permitAll();
+
 
 
     return httpSecurity.build();
+
 
 }
 
@@ -56,15 +60,15 @@ private  final CustomFilter customFilter;
     public AuthenticationManager authenticationManager( AuthenticationConfiguration authenticationConfiguration) throws  Exception{
     return  authenticationConfiguration.getAuthenticationManager();
 }
+
 @Bean
     public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
 }
-
-
-
-
-
+@Bean
+    public LoginSuccessHandler customLogin(){
+    return new LoginSuccessHandler();
+}
     }
 
 

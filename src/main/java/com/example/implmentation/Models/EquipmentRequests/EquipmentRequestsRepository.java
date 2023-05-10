@@ -19,7 +19,7 @@ public interface EquipmentRequestsRepository extends JpaRepository<EquipmentRequ
     void deleteRequestByUserIdandItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
    @Query( value = "select state from equipment_requests where item_id =:itemId and  user_id= :userId",nativeQuery = true)
     Optional<EquipmentRequests> findStateByUserIdAndItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
-    @Query( value = "select * from equipment_requests where  state='Expired' user_id= :userId",nativeQuery = true)
+    @Query( value = "select * from equipment_requests where  state='Expired' and user_id= :userId",nativeQuery = true)
     List<EquipmentRequests> getHistory(@Param("userId") Long userId);
 }
 

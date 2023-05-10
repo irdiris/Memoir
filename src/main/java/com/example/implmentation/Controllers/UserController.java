@@ -1,13 +1,18 @@
 package com.example.implmentation.Controllers;
 
 import com.example.implmentation.Models.User.User;
-import com.example.implmentation.Models.User.UserRepository;
 import com.example.implmentation.Models.User.UserService;
-import com.example.implmentation.Security.AuthenticationResponse;
 
+import com.example.implmentation.Security.CustomUserDetailsManager;
+import com.example.implmentation.Security.LoginSuccessHandler;
+import com.example.implmentation.Security.TokenGenerator;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,33 +24,38 @@ public class UserController {
 
 
 private final PasswordEncoder passwordEncoder;
+private final LoginSuccessHandler loginSuccessHandler;
+private final TokenGenerator tokenGenerator;
+private final CustomUserDetailsManager customUserDetailsManager;
 
 private final UserService userService;
-private final UserRepository userRepository;
+
+
 
 @Autowired
-    public UserController(PasswordEncoder passwordEncoder, UserService userService, UserRepository userRepository) {
-    this.userService = userService;
+    public UserController(PasswordEncoder passwordEncoder, LoginSuccessHandler loginSuccessHandler, TokenGenerator tokenGenerator, CustomUserDetailsManager customUserDetailsManager, UserService userService) {
+
+
     this.passwordEncoder = passwordEncoder;
-    this.userRepository = userRepository;
+    this.loginSuccessHandler = loginSuccessHandler;
+    this.tokenGenerator = tokenGenerator;
+    this.customUserDetailsManager = customUserDetailsManager;
+    this.userService = userService;
 }
     @PostMapping("/Register")
-    public ResponseEntity<String> Register(@RequestBody User user) throws IOException {
+    public ResponseEntity<String> Register(@ModelAttribute User user) throws IOException {
      userService.register(user);
-
-
       return  new ResponseEntity<>("User saved." ,HttpStatus.OK);
 
     }
 
     @PostMapping("/Authenticate")
-    public ResponseEntity<AuthenticationResponse> Authenticate(@RequestParam String username, @RequestParam  String password){
-          String token = userService.authenticate(User.builder()
-                          .username(username)
-                          .password(password)
-                  .build());
+    public void Authenticate(@ModelAttribute User user, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Authentication  authentication= userService.authenticate(user, request, response);
+        String token= tokenGenerator.generateToken(customUserDetailsManager.loadUserByUsername(authentication.getName()));
+        response.setHeader("Authorization", "Bearer " +token);
+        loginSuccessHandler.onAuthenticationSuccess(request, response, authentication);
 
-        return  new ResponseEntity<>(new AuthenticationResponse(token), HttpStatus.OK);
     }
 
 }
