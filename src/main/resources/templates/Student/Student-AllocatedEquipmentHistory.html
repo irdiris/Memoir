@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- icons link-->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+	<script>
+			const token = "[[${token}]]";
+            localStorage.setItem("token", token);
+	</script>
 	 <!-- custom css link-->
 	<link rel="stylesheet" href="../../static/css/style.css">
 	<title>Allocated equipment history</title>
 </head>
-<body>
+<body id="body">
 	
 	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
+	<section id="sidebar" onmouseleave="handleSidebarMouseLeave()" onmouseenter="handleSidebarMouseEnter()" >
+		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History<i class='bx bx-chevron-right icon-right' ></i></a>
-				<ul class="side-menu-dropdown">
-					<li><a href="Student-AllocatedEquipmentHistory.html"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
-					
-				</ul>
-			</li>
-			<li><a href="Student-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment </a></li>
+			<li><a  id="history-equipment" onclick="getHistory()" ><i class='bx bx-devices icon'></i> Allocation History </a></li>
+			<li><a id="request-equipment" ><i class='bx bx-devices icon'></i> Request Equipment </a></li>
 			
 		</ul>
 		
@@ -36,25 +34,24 @@
 	<!-- NAVBAR -->
 	<section id="content">
 		<nav>
-			<i class='bx bx-menu toggle-sidebar' ></i>
+			<i class='bx bx-menu toggle-sidebar' onclick="toggleSide()" ></i>
 			<form action="#"></form>
-			<div id="toggle-btn" class="fas fa-sun"></div>
+			<div id="toggle-btn" onclick="toggleDarkMode()" class="fas fa-sun"></div>
 			<div class="notif">
-				<i class="bi bi-bell-fill nav icon" id="bell"></i>
-				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+				<i class="bi bi-bell-fill nav icon"  onclick="handleIconClick()" id="bell"></i>
+				<ul onclick="handleIconClick()" class="notif-link">
+
+				    <li th:each="notification : ${notification}" ><i style="color: green;" th:text="${notification.getNotificationText()}"></i></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
-					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+
 				</ul>
 			</div>
 		
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../../static/css/images/student.png" alt="">
+				<img onclick="handleImgProfileClick()" src="../../static/css/images/student.png" alt="">
 				<ul class="profile-link">
-					<li><a href="Student-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
+					<li><a href="/View/Student/Update" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
 					<li><a href="../Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
 				</ul>
 			</div>
@@ -67,7 +64,10 @@
 			<ul class="snippet">
 				<li><a href="#">Home</a></li>
 				<li class="divider">/</li>
-				<li><a href="#" class="active"> Allocated equipment history</a></li></ul>
+				<li><a href="#" class="active"> Allocation History</a></li>
+				
+				<li class="divider">/</li>
+				<li><a href="#" class="active"> Allocated Equipment History</a></li></ul>
 			<div class="data">
 				<div class="content-data">
 
@@ -77,30 +77,30 @@
 						<h3>Equipment Allocation Details</h3>
 					</div> 
 					<div class="table-wrapper">
-						<table class="fl-table">
-							
-							
+						<table class="fl-table" id="container">
+
+
 							<thead>
 							<tr>
-                                <th>Holder ID</th>
-                                <th>Item ID</th>
-                                <th>Date of acquisition</th>
-                                <th>Date of return</th>
-                                <th>State</th>
+								<th>Holder ID</th>
+								<th>Item ID</th>
+								<th>Date of acquisition</th>
+								<th>Date of return</th>
+								<th>State</th>
 							</tr>
 							</thead>
 							<tbody>
 							<tr th:each="history: ${history}">
 								<td th:text="${history.userId.getId()}"></td>
-                                <td th:text="${history.itemId.getSerialNumber()}"></td>
+								<td th:text="${history.itemId.getSerialNumber()}"></td>
 								<td th:text="${history.dateOfAcquisition}"></td>
 								<td th:text="${history.dateOfReturn}"></td>
 								<td th:text="${history.state}"></td>
-								
+
 							</tr>
 							</tbody>
-						
-							
+
+
 							<tbody>
 						</table>
 
@@ -112,10 +112,12 @@
 		</main>
 		
 	</section>
-	
 
-	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
-	<script src="../../static/js/script2.js"></script>
+
+	<!--custom js link-->
+
+	<script src="../../static/js/studentJs.js"></script>
+
+
 </body>
 </html>

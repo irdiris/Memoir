@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- icons link-->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 	 <!-- custom css link-->
 	<link rel="stylesheet" href="../../static/css/style.css">
@@ -17,15 +17,10 @@
 	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
+		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History<i class='bx bx-chevron-right icon-right' ></i></a>
-				<ul class="side-menu-dropdown">
-					<li><a href="Student-AllocatedEquipmentHistory.html"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
-					
-				</ul>
-			</li>
-			<li><a href="Student-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment </a></li>
+			<li><a  href="" ><i class='bx bx-devices icon'></i> Allocation History</a></li>
+			<li><a  href="/View/Student/Request" ><i class='bx bx-devices icon'></i> Request Equipment </a></li>
 			
 		</ul>
 		
@@ -81,11 +76,11 @@
 							
 							<thead>
 							<tr>
-                                <th>Holder ID</th>
-                                <th>Item ID</th>
-                                <th>Date of aquisition</th>
-                                <th>Date of return</th>
-                                <th>State</th>
+								<th>Item ID</th>
+								<th>Serial number</th>
+								<th>Type</th>
+								<th>Description</th>
+								<th>State</th>
 								<th>Action</th>
 							</tr>
 							</thead>
@@ -97,11 +92,8 @@
 								<td>Content 1</td>
 								<td>Content 1</td>
 								<td>
-								   <div>
-									<a href="#" class="table-button1">Request</a>
-									
-								   </div>
-							    </td>
+									<a href="Student-SendRequestEquipment.html" class="table-button1">Request</a>
+								</td>
 								
 							</tr>
 							<tr>
@@ -111,9 +103,7 @@
 								<td>Content 2</td>
                                 <td>Content 2</td>
 								<td>
-									<div>
-                                        <a href="#" class="table-button1">Request</a>
-                                    </div>
+									<a href="Student-SendRequestEquipment.html" class="table-button1">Request</a>
 								</td>
 							</tr>
 							<tr>
@@ -123,10 +113,8 @@
 								<td>Content 3</td>
 								<td>Content 3</td>
 								<td>
-									<div>
-										<a href="#" class="table-button1">Request</a>
-									</div>
-							</td>
+									<a href="Student-SendRequestEquipment.html" class="table-button1">Request</a>
+								</td>
 							</tr>
 							<tr>
 								<td>#</td>
@@ -135,9 +123,7 @@
 								<td>Content 4</td>
 								<td>Content 4</td>
 								<td>
-									<div>
-										<a href="#" class="table-button1">Request</a>
-									</div>
+									<a href="Student-SendRequestEquipment.html" class="table-button1">Request</a>
 								</td>
 							</tr>
 							<tr>
@@ -147,12 +133,10 @@
 								<td>Content 5</td>
 								<td>Content 5</td>
 								<td>
-									<div>
-										<a href="#" class="table-button1">Request</a> 
-									</div>
+									<a href="Student-SendRequestEquipment.html" class="table-button1">Request</a>
 								</td>
 							</tr>
-							</tr>
+							</tbody>
 						
 							
 							<tbody>
@@ -169,7 +153,6 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
-	<script src="../../static/js/script2.js"></script>
+
 </body>
 </html>

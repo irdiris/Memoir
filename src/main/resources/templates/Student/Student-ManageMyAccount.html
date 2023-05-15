@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
 	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="logo"><img src="#" class="logo-pic"></i> </a>
+		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
 			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-menu-dropdown">
@@ -75,10 +75,7 @@
 						<div class="details-personal">
 		
 							<div class="fields">
-								<div class="input-field">
-									<label>ID</label>
-									<input type="text" placeholder="Enter your id" required>
-								</div>
+
 								<div class="input-field">
 									<label>First Name</label>
 									<input type="text" placeholder="Enter your first name" required>
@@ -91,15 +88,7 @@
 									<label>Date of Birth</label>
 									<input type="date" placeholder="Enter birth date" required>
 								</div>
-		
-								<div class="input-field">
-									<label>Gender</label>
-									<select required>
-										<option disabled selected>Select gender</option>
-										<option>Male</option>
-										<option>Female</option>
-									</select>
-								</div>
+
 								<div class="input-field">
 									<label>Username</label>
 									<input type="text" placeholder="Enter your username" required>

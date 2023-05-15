@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js"crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/login.css" />
-
+     <!-- - custom css link-->
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css" />
     <title> Login & Sign-up </title>
   </head>
   <body>
@@ -19,15 +18,15 @@
             <h2 class="title">Sign in</h2>
 
             <div class="box">
-              <i class="fas fa-user"></i> <input type="text" name="username" placeholder="Username" />
+              <i class="fas fa-user"></i> <input name="username" id="username" type="text" placeholder="Username" />
             </div>
 
             <div class="box">
-              <i class="fas fa-lock"></i><input type="password" name="password" placeholder="Password" />
+              <i class="fas fa-lock"></i><input type="password" name="password" id="password" placeholder="Password" />
             </div>
 
-            <input type="submit" value="Login" class="btn solid" />
-
+            <input type="submit" id="login" value="Login" class="btn solid" />
+            
           </form>
 
           <!--SIGN UP FORM-->
@@ -35,31 +34,31 @@
             <h2 class="title">Sign up</h2>
 
             <div class="box">
-              <i class="fas fa-user"></i><input type="text"  name="id" placeholder="ID" />
+              <i class="fas fa-user"></i><input  name="id" type="text" placeholder="ID" />
             </div>
 
             <div class="box">
-              <i class="fas fa-user"></i><input type="text" name="username" placeholder="Username" />
+              <i class="fas fa-user"></i><input  name="username" type="text" placeholder="Username" />
             </div>
 
             <div class="box">
-              <i class="fas fa-envelope"></i><input type="email" name="email" placeholder="Email" />
+              <i class="fas fa-envelope"></i><input name="email" type="email" placeholder="Email" />
             </div>
 
             <div class="box">
-              <i class="fas fa-lock"></i><input type="password" name="password" placeholder="Password" />
+              <i class="fas fa-lock"></i><input name="password" type="password" placeholder="Password" />
             </div>
 
             <div>
               <input type="radio" id="type1" name="type" value="researcher" />
               <label for="type1">Researcher</label>
-
+        
               <input type="radio" id="type2" name="type" value="student" />
               <label for="type2">Student</label>
             </div>
 
             <input type="submit" class="btn" value="Sign up" />
-
+          
           </form>
         </div>
       </div>
@@ -89,16 +88,16 @@
 
 
  <!-- custom js -->
-    <script>
+    <script> 
       //LOGIN & SIGN-UP FORM
       const sign_in_btn = document.querySelector("#sign-in-btn");
       const sign_up_btn = document.querySelector("#sign-up-btn");
       const wrapper = document.querySelector(".wrapper");
-
+      
       sign_up_btn.addEventListener("click", () => {
         wrapper.classList.add("sign-up-mode");
       });
-
+      
       sign_in_btn.addEventListener("click", () => {
         wrapper.classList.remove("sign-up-mode");
       });

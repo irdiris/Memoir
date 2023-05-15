@@ -5,6 +5,8 @@ import com.example.implmentation.Models.EquipmentRequests.EquipmentRequestsRepos
 import com.example.implmentation.Models.Items.Items;
 import com.example.implmentation.Models.Items.ItemsRepository;
 import com.example.implmentation.Models.Notifications.NotificationRepository;
+import com.example.implmentation.Models.Notifications.Notifications;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +31,18 @@ public class StudentService {
     }
 
 public List<Items> getItemsForAllocation(){
-        List<Items> itemsList= itemsRepository.findItemsForAllocating();
-    return  itemsList;
+    return itemsRepository.findItemsForAllocating();
 }
 public void requestEquipment(EquipmentRequests equipmentRequests){
         equipmentRequestsRepository.save(equipmentRequests);
 }
+public List<Notifications> getNotifications(Long id){
+    return notificationRepository.getNotificationsById(id.intValue());
+
+}
+
 public List<EquipmentRequests> getHistory(Long id){
-        List<EquipmentRequests> equipmentRequestsList =equipmentRequestsRepository.getHistory(id);
-        return  equipmentRequestsList;
+    return equipmentRequestsRepository.getHistory(id);
 }
 public void UpdateProfile(Student student){
         Optional<Student> optionalStudent =studentRepository.findById(student.getId());

@@ -1,12 +1,15 @@
 package com.example.implmentation.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,42 +22,36 @@ public class SecurityConfig  {
 private  final CustomFilter customFilter;
 
 @Autowired
-    public SecurityConfig(CustomFilter customFilter, LoginSuccessHandler loginSuccessHandler) {
+    public SecurityConfig(CustomFilter customFilter) {
         this.customFilter = customFilter;
     }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws  Exception{
+        httpSecurity
 
-    httpSecurity
-
-            .csrf()
-            .disable()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-           .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
-            .authorizeRequests()
-            .requestMatchers("/templates/Student/**").permitAll()
-            .requestMatchers("/View/**").permitAll()
-            .requestMatchers("Implementation/user/**").permitAll()
-            .requestMatchers("/Pages/**").permitAll()
-            .requestMatchers("/resources/**").permitAll()
-            .requestMatchers("/static/css/**", "static/js/**", "static/css/images/**").permitAll()
-            .anyRequest().authenticated()
-        .and()
+                .csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests()
+                .requestMatchers("/templates/Student/**").permitAll()
+                .requestMatchers("/View/**").permitAll()
+                .requestMatchers("Implementation/user/**").permitAll()
+                .requestMatchers("/Pages/**").permitAll()
+                .requestMatchers("/static/css/**", "static/js/**", "static/css/images/**","/resources/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
                 .loginPage("/Pages/LanderPage")
-
                 .permitAll();
+        return httpSecurity.build();
 
+    }
 
-
-    return httpSecurity.build();
-
-
-}
 
 @Bean
     public AuthenticationManager authenticationManager( AuthenticationConfiguration authenticationConfiguration) throws  Exception{
@@ -65,11 +62,12 @@ private  final CustomFilter customFilter;
     public PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
 }
-@Bean
-    public LoginSuccessHandler customLogin(){
-    return new LoginSuccessHandler();
-}
+    @Bean
+    public WebSecurityCustomizer ignoringCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/resources/static/**");
     }
+    }
+
 
 
 
