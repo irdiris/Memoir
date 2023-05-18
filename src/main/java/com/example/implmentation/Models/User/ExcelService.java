@@ -61,7 +61,7 @@ private final UserRepository userRepository;
             user.setLastName(matchingRow.getCell(2).getStringCellValue());
             user.setGender(matchingRow.getCell(3).getStringCellValue());
             user.setBirthDate(matchingRow.getCell(4).getStringCellValue());
-            user.setAdress(matchingRow.getCell(5).getStringCellValue());
+            user.setAddress(matchingRow.getCell(5).getStringCellValue());
             user.setPhone((int) matchingRow.getCell(6).getNumericCellValue());
             userRepository.save(user);
 

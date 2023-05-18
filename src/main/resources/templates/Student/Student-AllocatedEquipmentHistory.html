@@ -22,8 +22,9 @@
 	<section id="sidebar" onmouseleave="handleSidebarMouseLeave()" onmouseenter="handleSidebarMouseEnter()" >
 		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a  id="history-equipment" onclick="getHistory()" ><i class='bx bx-devices icon'></i> Allocation History </a></li>
-			<li><a id="request-equipment" ><i class='bx bx-devices icon'></i> Request Equipment </a></li>
+			<li><a href="#" onclick="getHistory()"><i class="bi bi-calendar2-event icon"></i> Allocation History<i  ></i></a>
+			</li>
+			<li><a id="request-equipment" href="#" onclick="getAllocationItems()" ><i class='bx bx-devices icon'></i> Request Equipment </a></li>
 			
 		</ul>
 		

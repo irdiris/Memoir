@@ -109,7 +109,7 @@ public class AllocationManagerService {
    public void updateProfile (AllocationManager allocationManager){
         Optional<AllocationManager> allocationManagerOld = allocationManagerRepository.findById(allocationManager.getId());
         allocationManagerOld.get().getUser().setPassword(allocationManager.getUser().getPassword());
-       allocationManagerOld.get().getUser().setAdress(allocationManager.getUser().getAdress());
+       allocationManagerOld.get().getUser().setAddress(allocationManager.getUser().getAddress());
        allocationManagerOld.get().getUser().setEmail(allocationManager.getUser().getEmail());
        allocationManagerOld.get().getUser().setFirstName(allocationManager.getUser().getFirstName());
        allocationManagerOld.get().getUser().setLastName(allocationManager.getUser().getLastName());

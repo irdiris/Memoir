@@ -26,7 +26,7 @@ public class User {
     private String lastName;
     private String gender;
     private String birthDate;
-    private String adress;
+    private String Address;
     private int phone;
     private String username;
     private String email;

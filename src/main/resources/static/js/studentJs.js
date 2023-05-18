@@ -215,6 +215,32 @@ chart1.render();
     // Handle any errors
 });
 }
+function getAllocationItems() {
+    const url = "/View/Student/Request";
+    var token = localStorage.getItem("token")
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': token.valueOf()
+    };
+
+    fetch(url, {
+        method: 'GET',
+        headers: headers
+    })
+        .then(response => response.text())
+        .then(htmlContent => {
+            document.open();
+            document.write(htmlContent);
+            //	const buttonnew = document.getElementById('toggle-btn');
+            //	buttonnew.addEventListener('click', toggleDarkMode);
+
+            document.close();
+
+        })
+        .catch(error => {
+            // Handle any errors
+        });
+}
 
 
 

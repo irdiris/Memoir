@@ -1,29 +1,29 @@
 package com.example.implmentation.Security;
 
+import com.example.implmentation.Models.User.UserRepository;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Service
 public class TokenGenerator {
     private final long expirationTime= 70000;
+    private final UserRepository userRepository;
 
     private final String securityKey="614E645267556B58703273357638792F423F4528482B4D6251655368566D5971";
+
+    public TokenGenerator(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
