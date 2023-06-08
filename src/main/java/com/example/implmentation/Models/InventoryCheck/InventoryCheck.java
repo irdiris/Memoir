@@ -1,7 +1,8 @@
 package com.example.implmentation.Models.InventoryCheck;
 
 import com.example.implmentation.Models.Items.Items;
-import com.example.implmentation.Models.User.User;
+import com.example.implmentation.Models.Purchases.Purchases;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,15 +14,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Inventory_check")
+@Table(name = "InventoryCheck")
 public class InventoryCheck {
     @Id
-    @SequenceGenerator(name = "inventoryCheck_Sequence", sequenceName = "InventoryCheck_Sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "InventoryCheck_Sequence")
-    private int id;
-    private String status;
-    @ManyToOne
-    @JoinColumn(name = "item", foreignKey = @ForeignKey(name = "fk_item_Not"), referencedColumnName = "serialNumber")
+    @SequenceGenerator(name = "inventory_check_Sequence", sequenceName = "inventory_check_Sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inventory_check_Sequence")
+    private Long id;
+
+ private String status;
+ private String DateOfCheck;
+    private String name;
+    private String LastSeen;
+
+    @ManyToOne()
+    @JoinColumn(name = "item", referencedColumnName = "serialNumber", nullable = false)
     private Items item;
-    private String InspectionDate;
+
+
+
 }

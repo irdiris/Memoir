@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,11 +58,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: #008000;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: #008000;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 			<span class="divider"></span>
@@ -105,83 +105,29 @@
 							<tr>
                                 <th>Holder ID</th>
                                 <th>Item ID</th>
-                                <th>Date of aquisition</th>
+                                <th>Date of acquisition</th>
                                 <th>Date of return</th>
                                 <th>State</th>
 								<th>Action</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="equipment: ${equipment}">
+								<td th:text="${equipment.getUserId().getId()}"></td>
+                                <td th:text="${equipment.getItemId().getSerialNumber()}"></td>
+								<td  th:text="${equipment.getDateOfAcquisition()}"></td>
+								<td th:text="${equipment.getDateOfReturn()}"></td>
+								<td  th:text="${equipment.getState()}"></td>
 								<td>
 								   <div>
-									<a href="#" class="table-button1">Accept</a>
-									<a href="#" class="table-button2">Refuse</a>
+									<a href="#" class="table-button1" onclick="AcceptRequest(this)">Accept</a>
+									<a href="#" class="table-button2" onclick="RefuseRequest(this)">Refuse</a>
 								   </div>
 							    </td>
 								
 							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-                                <td>Content 2</td>
-								<td>
-									<div>
-                                        <a href="#" class="table-button1">Accept</a>
-                                        <a href="#" class="table-button2">Refuse</a>
-                                    </div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<div>
-										<a href="#" class="table-button1">Accept</a>
-                                        <a href="#" class="table-button2">Refuse</a>
-									</div>
-							</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<div>
-										<a href="#" class="table-button1">Accept</a>
-                                        <a href="#" class="table-button2">Refuse</a> 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<div>
-										<a href="#" class="table-button1">Accept</a>
-                                        <a href="#" class="table-button2">Refuse</a> 
-									</div>
-								</td>
-							</tr>
-							</tr>
-						
-							
-							<tbody>
+
+							</tbody>
 						</table>
 
 					</div>
@@ -195,7 +141,8 @@
 	
 
 	 <!--custom js link-->
-	 <script src="../../static/js/script.js"></script>
-	<script src="../../static/js/script2.js"></script>
+	<script src="../../static/js/AllocationManagerJs.js"></script>
+	 <script src="../../static/js/script2.js"></script>
+
 </body>
 </html>

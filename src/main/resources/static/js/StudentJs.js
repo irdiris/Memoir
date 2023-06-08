@@ -22,7 +22,7 @@ if(darkMode === 'enabled'){
     enableDarkMode();
 }
 function toggleDarkMode() {
-    console.log("wtf");
+
     darkMode = localStorage.getItem('dark-theme');
     console.log(darkMode);
     if (darkMode === 'disabled') {
@@ -113,78 +113,6 @@ function handleIconClick() {
 }
 
 
-// APEXCHART
-//CHART
-var options = {
-    series: [{
-        name: 'Equipments',
-        data: [60, 80, 112, 56, 33, 77]
-    }],
-    chart: {
-        type: 'bar',
-        height: 350
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    xaxis: {
-        categories: ['Security', 'Robotics', 'Computers', 'Servers', 'HPC','Consumable' ],
-    },
-    yaxis: {
-        title: {
-            text: 'Number of Equipments'
-        }
-    },
-    fill: {
-        opacity: 1
-    },
-    tooltip: {
-        y: {
-            formatter: function (val) {
-                return val + " Equipment"
-            }
-        }
-    }
-};
-
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
-
-//CHART1
-var options = {
-    series: [44, 55, 13, 43, 22],
-    chart: {
-        width: 380,
-        type: 'pie',
-    },
-    labels: ['Operational', 'In Storage', 'Out of Service', 'Under Maintenance', 'Assigned'],
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-                position: 'bottom'
-            }
-        }
-    }]
-};
-
-var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
-chart1.render();
 
 
 
@@ -193,7 +121,7 @@ chart1.render();
     const url = "/View/Student/History";
     var token = localStorage.getItem("token")
     const headers = {
-    'Content-Type': 'application/json',
+
     'Authorization': token.valueOf()
 };
 
@@ -207,7 +135,6 @@ chart1.render();
     document.write(htmlContent);
     //	const buttonnew = document.getElementById('toggle-btn');
     //	buttonnew.addEventListener('click', toggleDarkMode);
-
     document.close();
 
 })
@@ -219,7 +146,7 @@ function getAllocationItems() {
     const url = "/View/Student/Request";
     var token = localStorage.getItem("token")
     const headers = {
-        'Content-Type': 'application/json',
+
         'Authorization': token.valueOf()
     };
 
@@ -231,8 +158,6 @@ function getAllocationItems() {
         .then(htmlContent => {
             document.open();
             document.write(htmlContent);
-            //	const buttonnew = document.getElementById('toggle-btn');
-            //	buttonnew.addEventListener('click', toggleDarkMode);
 
             document.close();
 
@@ -242,5 +167,48 @@ function getAllocationItems() {
         });
 }
 
+function submitForm(form) {
+    // Get the form data
+    const formData = new FormData(form);
+    var token = localStorage.getItem("token");
+    // Submit the form
+    fetch("/View/Student/updateProfile", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Authorization": token.valueOf(),
+        },
+    })
 
+}
 
+const myForm = document.getElementById("updateForm");
+
+myForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    submitForm(myForm);
+});
+
+function getSerialNumber(button) {
+    var row = button.parentNode.parentNode;
+    var rowId = row.id;
+    localStorage.setItem("rowId", rowId);
+}
+function sendRequest(){
+    var dateOfAcquisition = document.getElementById("dateOfTaking").value
+    var dateOfReturn = document.getElementById("dateOfReturn").value
+    var serialNumber = localStorage.getItem("rowId").valueOf()
+    var formData = new FormData();
+    formData.append("dateOfAcquisition", dateOfAcquisition);
+    formData.append("dateOfReturn", dateOfReturn);
+    formData.append("serialNumber", serialNumber);
+    var token = localStorage.getItem("token");
+
+    fetch("/View/Student/sendRequest", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Authorization": token.valueOf(),
+        },
+    })
+}

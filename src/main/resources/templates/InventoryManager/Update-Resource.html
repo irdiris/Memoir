@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,9 @@
         <li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
 		<li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
 		<li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
-</section>
+		<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+
+ </section>
 
 
 <!-- NAVBAR -->
@@ -34,11 +36,11 @@
         <div class="notif">
             <i class="bi bi-bell-fill nav icon" id="bell"></i>
             <ul class="notif-link">
-                <li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+                <li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
                 <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
                 <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
             </ul>
         </div>
         <span class="divider"></span>
@@ -68,32 +70,35 @@
 			
 								<div class="fields">
 									<div class="input-field">
-										<label>ID</label>
-										<input type="text" placeholder="Enter  id" required>
-									</div>
-									<div class="input-field">
 										<label>Receipt ID</label>
-										<input type="text" placeholder="Enter receipt id" required>
+										<select  type="text"  class="field" required >
+											<option disabled selected>Receipt Id</option>
+											<option th:id="purchases" th:each="receipt: ${receipts}" th:text="${receipt.getId()}"></option>
+										</select>
 									</div>
 									<div class="input-field">
 										<label>Name</label>
-										<input type="text" placeholder="Enter name" required>
+										<input type="text" th:id="name" placeholder="Enter name" required>
 									</div>
 									
 									<div class="input-field">
 										<label>Type</label>
-										<input type="text" placeholder="Enter type" required>
+										<select type="text"  class="field" required >
+											<option disabled selected>Type</option>
+											<option th:id="type" th:each="category: ${categories}" th:text="${category.getName()}"></option>
+
+										</select>
 									</div>
 
 									<div class="input-field">
 										<label>Quantity</label>
-										<input type="text" placeholder="Enter quantity" required>
+										<input type="text" th:id="quantity" placeholder="Enter quantity" required>
 									</div>
 								</div>
 							</div>
 			
-							<button >
-									<span class="btnText">Save</span>
+							<button onclick="submitFormResource()" >
+									<span class="btnText" >Save</span>
 								</button>
 							</div> 
 						</div>
@@ -107,7 +112,7 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
+	<script src="../../static/js/InventoryManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

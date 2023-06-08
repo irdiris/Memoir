@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class AllocationManager {
     @Id
     private Long id;
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @MapsId
     @JoinColumn(name = "id",referencedColumnName = "id")
     private User user;

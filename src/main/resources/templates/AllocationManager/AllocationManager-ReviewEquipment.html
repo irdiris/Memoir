@@ -10,13 +10,14 @@
 
 	 <!-- custom css link-->
 	<link rel="stylesheet" href="../../static/css/style.css">
+
 	<title>Review equipment </title>
 </head>
 <body>
 	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
+		<a href="#" class="logo"><img src="../../../../../../../css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
 			<li><a href="AllocationManager-InventoryState.html" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
 			
@@ -40,7 +41,7 @@
 				 <a href="#"><i class="bi bi-calendar2-event icon"></i> Review Allocated <br> Items<i class='bx bx-chevron-right icon-right' ></i></a>
 			<ul class="side-menu-dropdown">
 				<li><a href="AllocationManager-ReviewEquipment.html"><i class='bx bx-devices icon'></i>Review<br> Equipment</a></li>
-				<li><a href="AllocationManager-ReviewHPC.html"><i class="bi bi-device-ssd icon"></i>Review HPC </a></li>
+				<li><a href="../../../../../../../AllocationManager-ReviewHPC.html"><i class="bi bi-device-ssd icon"></i>Review HPC </a></li>
 				
 			</ul>
 		    </li>
@@ -58,19 +59,19 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: #008000;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: #008000;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../../static/css/images/teacher7.png" alt="">
+				<img src="../../../../../../../css/images/teacher7.png" alt="">
 				<ul class="profile-link">
 					<li><a href="AllocationManager-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
-					<li><a href="../Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+					<li><a href="Login & Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -104,60 +105,31 @@
 							
 							<thead>
 							<tr>
-                                <th>Holder ID</th>
-                                <th>Item ID</th>
-                                <th>Date of aquisition</th>
-                                <th>Date of return</th>
-                                <th>State</th>
-								
+								<th>Holder ID</th>
+								<th>Item ID</th>
+								<th>Date of acquisition</th>
+								<th>Date of return</th>
+								<th>State</th>
+								<th>Action</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td style="color: red; font: bold;">Allocated</td>
+							<tr th:each="equipment: ${equipment}">
+								<td th:text="${equipment.getUserId().getId()}"></td>
+								<td th:text="${equipment.getItemId().getSerialNumber()}"></td>
+								<td  th:text="${equipment.getDateOfAcquisition()}"></td>
+								<td th:text="${equipment.getDateOfReturn()}"></td>
+								<td  th:text="${equipment.getState()}"></td>
+								<td style="color: red; font: bold;">
+									<a  href="#" class="table-button3" onclick="MarkEquipment(this)" th:if="${equipment.getState() == 'Allocated'}">Mark expired</a>
+								</td>
 								
 								
 							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-                                <td style="color: red; font: bold;">Allocated</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td style="color: red; font: bold;">Allocated</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td style="color: red; font: bold;">Allocated</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td style="color: red; font: bold;">Allocated</td>
-								
-							</tr>
-							</tr>
+
 						
 							
-							<tbody>
+							</tbody>
 						</table>
 
 					</div>
@@ -171,7 +143,7 @@
 	
 
 	 <!--custom js link-->
-	 <script src="../../static/js/script.js"></script>
-	 <script src="../../static/js/script2.js"></script>
+	<script src="../../static/js/AllocationManagerJs.js"></script>
+	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

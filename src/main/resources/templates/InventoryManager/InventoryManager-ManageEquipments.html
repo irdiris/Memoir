@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,8 @@
 			<li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
 			<li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
       <li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+
 	</section>
 	
 
@@ -34,11 +36,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 			<span class="divider"></span>
@@ -70,24 +72,40 @@
 						<h3>Equipments Details</h3>
 						</div>
 						<input type="checkbox" id="show">
-                       <label for="show" class="show-btn">ADD</label> 
+                       <label for="show" class="show-btn">ADD</label>
+
                         <div class="container" id="container-scrl">
+							<form  th:action="@{/InventoryManager/addEquipment}" th:object="${items}" method="post">
 						<label for="show" class="close-btn" title="close">×</label>
 						<h1>Add Equipment </h1>
 						<div class="right">
-							<input type="text" class="field" placeholder="ID">
-							<input type="text" class="field" placeholder="Reciept ID">
-							<input type="text" class="field" placeholder="Serial number">
-							<input type="text" class="field" placeholder="Equipment name" >
-							<input type="text" class="field" placeholder="Type">
-							<input type="text" class="field" placeholder="Location">
-							<input type="text" class="field" placeholder="State">
-							<textarea placeholder="Description" class="field"></textarea>
+							<select type="text" name="purchases" class="field" required >
+								<option disabled selected>Receipt Id</option>
+								<option th:each="receipt: ${receipts}" th:text="${receipt.getId()}"></option>
+							</select>
+							<input type="text" class="field" name="serialNumber" placeholder="Serial number" required>
+							<input type="text" class="field" name="name" placeholder="Equipment name" required>
+							<select type="text" name="type" class="field" required >
+								<option disabled selected>Type</option>
+								<option th:each="category: ${categories}" th:text="${category.getName()}"></option>
+
+							</select>
+							<input type="text" name="service" class="field" placeholder="Location" required>
+							<select required type="text" name="state" class="field"  >
+								<option disabled selected>State</option>
+								<option>Available</option>
+								<option>Missing</option>
+								<option>Allocated</option>
+								<option>Under maintenance</option>
+								<option>Pending</option>
+							</select>
+							<textarea placeholder="Description" name="description" class="field" required></textarea>
 							<button class="btn">Save</button>
 					</div>
 							<closeform></closeform>
-						 
+					</form>
 					</div>
+
 					<div class="table-wrapper">
 						<table class="fl-table">
 							
@@ -95,8 +113,7 @@
 							<thead>
 							<tr>
 								<th>ID</th>
-                                <th>Reciept ID</th>
-                                <th>Serial Number</th>
+                                <th>Receipt ID</th>
                                 <th>Equipment name</th>
 								<th>Type</th>
                                 <th>Description</th>
@@ -106,91 +123,25 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="items: ${items}">
+								<td th:text="${items.getSerialNumber()}"></td>
+                                <td th:text="${items.getPurchases().getId()}"></td>
+								<td th:text="${items.getName()}"></td>
+								<td th:text="${items.getCategories().getName()}"></td>
+								<td th:text="${items.getDescription()}"></td>
+								<td th:text="${items.getService()}"></td>
+								<td th:text="${items.getState()}"></td>
 								<td>
 								   <div>
-									<a href="Update-Equipment.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-									<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
+									<a href="/InventoryManager/getUpdate"  onclick="saveId(this)" id="icon"><i class='bx bx-edit-alt'></i></a>
+									<a  href="#" onclick="Deleteitem(this)"><i class='bx bx-trash'id="iconn"></i></a>
 								   </div>
 							    </td>
 								
 							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-                                <td>Content 2</td>
-								<td>
-									<div>
-										<a href="Update-Equipment.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<div>
-										<a href="Update-Equipment.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-							</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<div>
-										<a href="Update-Equipment.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<div>
-										<a href="Update-Equipment.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							</tr>
-						
-							
-							<tbody>
+
+							</tbody>
+
 						</table>
 
 					</div>
@@ -204,7 +155,7 @@
 	
 
 	 <!--custom js link-->
-    <script src="../../static/js/script.js"></script>
+    <script src="../../static/js/InventoryManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ import java.util.Set;
 @Builder
 @Entity
 public class Researcher {
-  @OneToOne(optional = false)
+  @OneToOne(optional = false,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
   @MapsId
 
   @JoinColumn(name = "id",referencedColumnName = "id")

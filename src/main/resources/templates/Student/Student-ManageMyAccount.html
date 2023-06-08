@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +18,8 @@
 	<section id="sidebar">
 		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History<i  ></i></a>
-			</li>
-			<li><a href="Student-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment </a></li>
-			
+			<li><a href="#" onclick="getHistory()"><i class="bi bi-calendar2-event icon"></i> Allocation History</a></li>
+			<li><a href="#" onclick="getAllocationItems()"><i class='bx bx-devices icon'></i> Request Equipment </a></li>
 		</ul>
 		
 	</section>
@@ -31,23 +29,23 @@
 	<!-- NAVBAR -->
 	<section id="content">
 		<nav>
-			<i class='bx bx-menu toggle-sidebar' ></i>
+			<i class='bx bx-menu toggle-sidebar'  onclick="toggleSide()"></i>
 			<form action="#"></form>
-			<div id="toggle-btn" class="fas fa-sun"></div>
+			<div id="toggle-btn" class="fas fa-sun" onclick="toggleDarkMode()"></div>
 			<div class="notif">
-				<i class="bi bi-bell-fill nav icon" id="bell"></i>
+				<i class="bi bi-bell-fill nav icon" id="bell" onclick="handleIconClick()"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 		
 			<span class="divider"></span>
 			<div class="profile">
-				<img src="../../static/css/images/student.png" alt="">
+				<img src="../../static/css/images/student.png" alt="" onclick="handleImgProfileClick()">
 				<ul class="profile-link">
 					<li><a href="../Login%20&%20Sign-up.html"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
 				</ul>
@@ -66,15 +64,14 @@
 			<div class="content-data">
 			<div class="container1">
 		
-				<form id="updateForm" method="post">
+				<form id="updateForm" >
 					<div class="form first">
 						<div class="details-personal">
 		
 							<div class="fields">
-
 								<div class="input-field">
 									<label>First Name</label>
-									<input type="text" name="firstName" placeholder="Enter your first name" required>
+									<input type="text"  name="firstName" placeholder="Enter your first name" required>
 								</div>
 								<div class="input-field">
 									<label>Last Name</label>
@@ -82,15 +79,14 @@
 								</div>
 								<div class="input-field">
 									<label>Date of Birth</label>
-									<input type="date"  name="birthDate" placeholder="Enter birth date" required>
+									<input type="date" name="birthDate" placeholder="Enter birth date" required>
 								</div>
-
 								<div class="input-field">
 									<label>Username</label>
 									<input type="text" name="username" placeholder="Enter your username" required>
 								</div>
 								<div class="input-field">
-									<label>Email Address</label>
+									<label>Email Adress</label>
 									<input type="text" name="email" placeholder="Enter your email address" required>
 								</div>
 		
@@ -100,20 +96,17 @@
 								</div>
 		                        <div class="input-field">
 									<label>Address</label>
-									<input type="text" name="address" placeholder="Enter your adress" required>
+									<input type="text" name="address" placeholder="Enter your address" required>
 								</div>
 								<div class="input-field">
-									<label>Speciality</label>
+									<label>Specialty</label>
 									<input type="text" name="specialty" placeholder="Enter your speciality" required>
 								</div>
 								<div class="input-field">
 									<label>Institution</label>
-									<input type="text" name="institution" placeholder="Enter your level" required>
+									<input type="text" name="level" placeholder="Enter your level" required>
 								</div>
-								<div class="input-field">
-									<label>Level</label>
-									<input type="text" name="level" placeholder="Enter your position" required>
-								</div>
+
 								<div class="input-field">
 									<label>Password</label>
 									<input type="text" name="password" placeholder="Enter your password" required>
@@ -122,13 +115,12 @@
 						</div>
 		
 						<button >
-								<span class="btnText">Save</span>
+								<span class="btnText" >Save</span>
 							</button>
-						</div>
-				</form>
+						</div> 
 					</div>
 		
-
+				</form>
 			</div>
 		</div>
 		</main>
@@ -137,7 +129,7 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
-	<script src="../../static/js/script2.js"></script>
+	<script src="../../static/js/StudentJs.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,8 @@
 			<li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
 			<li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
       <li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+
 	</section>
 	
 
@@ -34,11 +36,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 			<span class="divider"></span>
@@ -69,20 +71,22 @@
 					<div class="head">
 						<h3>Purchases Details</h3>
 						</div>
+
 						<input type="checkbox" id="show">
                        <label for="show" class="show-btn">ADD</label> 
                         <div class="container" id="container-scrl">
 						<label for="show" class="close-btn" title="close">×</label>
 						<h1>Add Purchase </h1>
 						<div class="right">
-							<input type="text" class="field" placeholder="Reciept ID">
-							<input type="text" class="field" placeholder="Supplier">
-							<textarea placeholder="Items" class="field"></textarea>
-							<input type="date" class="field" placeholder="Date">
-							<button class="btn">Save</button>
+							<form  th:action="@{/InventoryManager/addPurchase}" th:object="${purchases}" method="post">
+							<input type="text" name="id" class="field" placeholder="Receipt ID">
+							<input type="text" name="supplier" class="field" placeholder="Supplier">
+							<textarea placeholder="Description"  name="description" class="field"></textarea>
+							<input placeholder="Purchase date" name="date" class="field"  type="text"onfocus="(this.type='date')" onblur="(this.type='text')"id="date" />
+
+							<button class="btn">Save</button></form>
 					</div>
-							<closeform></closeform>
-						 
+
 					</div>
 					<div class="table-wrapper">
 						<table class="fl-table">
@@ -90,51 +94,21 @@
 							
 							<thead>
 							<tr>
-								<th>Reciept ID</th>
+								<th>Receipt ID</th>
                                 <th>Supplier</th>
-								<th>Items</th>
+								<th>Description</th>
 								<th>Date</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="purchase: ${purchases}">
+								<td th:text="${purchase.getId()}"></td>
+								<td th:text="${purchase.getSupplier()}"></td>
+								<td th:text="${purchase.getDescription()}"></td>
+								<td th:text="${purchase.getDate()}"></td>
 							</tr>
-							<tr>
-								<td>#</td>
-                                <td>Content 2</td>
-								<td>Content 2</td>
-                                <td>Content 2</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								
-							</tr>
-							</tr>
-						
-							
-							<tbody>
+							</tbody>
+
 						</table>
 
 					</div>

@@ -28,6 +28,4 @@ public class HPCRequests {
     @JoinColumn(name = "itemId",foreignKey = @ForeignKey(name = "fk_Hpc"), referencedColumnName = "serialNumber")
     private Items item;
     private String dateOfAcquisition;
-    private String dateOfReturn;
-    private String Hours;
 }

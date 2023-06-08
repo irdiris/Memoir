@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,13 +36,13 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>    
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>    
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>   
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>   
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>    
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>    
 				</ul>
 			</div>
 		
@@ -73,25 +73,36 @@
 					<div class="head">
 						<h3>Work Personnel Details</h3>
 					</div>
-						<input type="checkbox" id="show">
+						<input type="checkbox" id="show" >
                        <label for="show" class="show-btn">ADD</label> 
                     <div class="container" id="container-scrl">
 						<label for="show" class="close-btn" title="close">×</label>
 						<h1>Add Manager</h1>
+						<form  th:action="@{/Admin/addUsers}" th:object="${user}" method="post">
 					<div class="right">
-							<input type="text" class="field" placeholder="ID">
-							<input type="text" class="field" placeholder="First name">
-							<input type="text" class="field" placeholder="Last name">
-							<input type="date" class="field" placeholder="Birth-date" title="Birth-date">
-							<input type="text" class="field" placeholder="Gender: male or female">
-							<input type="text" class="field" placeholder="Adress">
-							<input type="text" class="field" placeholder="Email adress">
-							<input type="text" class="field" placeholder="Phone number">
-							<input type="text" class="field" placeholder="Type">
-							<input type="text" class="field" placeholder="Status">
-							<button class="btn">Save</button>
+							<input type="text" name="id" class="field" placeholder="ID">
+							<input type="text"  name="firstName" class="field" placeholder="First name">
+							<input type="text"  name="lastName" class="field" placeholder="Last name">
+						<input type="text"  name="username" class="field" placeholder="Username">
+						<input type="text"  name="password" class="field" placeholder="Password">
+							<input placeholder="Birth-date" name="birthDate" class="field"  type="text"onfocus="(this.type='date')" onblur="(this.type='text')"id="date" />
+							<select  class="field" name="gender">
+								<option disabled selected>Gender</option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+							<input type="text" class="field"  name="address" placeholder="Address">
+							<input type="text" class="field"  name="email" placeholder="Email address">
+							<input type="text" class="field"  name="phone" placeholder="Phone number">
+						<select  class="field" name="type">
+							<option disabled selected>Type</option>
+							<option value="Allocation Manager">Allocation Manager</option>
+							<option value="Inventory Manager">Inventory Manager</option>
+						</select>
+							<input type="text" class="field" name="state" placeholder="Status">
+							<button type="submit" class="btn">Save</button>
 					</div>
-							<closeform></closeform>
+						</form>
 						 
 					</div>
 						
@@ -111,78 +122,21 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="user:${user}">
+								<td th:text="${user.getId()}"></td>
+								<td th:text="${user.getFirstName()}"></td>
+								<td th:text="${user.getLastName()}"></td>
+								<td th:text="${user.getEmail()}"></td>
+								<td th:text="${user.getType()}"></td>
+								<td th:text="${user.getState()}"></td>
 								<td>
 								   <div >
-									<a  href="Update-Manager.html" ><i class='bx bx-edit-alt'></i></a>
-									<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
+									<a onclick="DeleteUser(this)" href="#"><i class='bx bx-trash'id="iconn"></i></a>
 								   </div>
 							    </td>
-								
 							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>
-									<div>
-										<a href="Update-Manager.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<div>
-										<a href="Update-Manager.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-							</td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<div>
-										<a href="Update-Manager.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<div>
-										<a href="Update-Manager.html" id="iconn"><i class='bx bx-edit-alt'></i></a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								</td>
-							</tr>
-							</tr>
+
+							</tbody>
 						
 							
 							<tbody>
@@ -199,7 +153,7 @@
 	
 
 	 <!-- custom js link-->
-	 <script src="../../static/js/script.js"></script>
+	<script src="../../static/js/AdminJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

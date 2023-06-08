@@ -1,6 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<script>
+		var missing = [[${missing}]];
+		var pending = [[${pending}]];
+		var available = [[${available}]];
+		var underMaintenance = [[${underMaintenance}]];
+		var allocated = [[${allocated}]];
+		var security = [[${security}]];
+		var network = [[${network}]];
+		var computers = [[${computers}]];
+		var hpc= [[${hpc}]];
+		var robotics= [[${robotics}]];
+
+	</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- icons link-->
@@ -18,11 +31,12 @@
 	<section id="sidebar">
 		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a href="InventoryManager-InventoryState.html" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
-			<li><a href="InventoryManager-ManageEquipments.html"><i class='bx bx-devices icon'></i> Manage Equipments</a></li>
-			<li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
-			<li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
-      <li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+			<li><a href="#" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
+			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Manage Equipments</a></li>
+			<li><a href="/InventoryManager/Purchases"><i class="bi bi-receipt icon"></i> Purchases </a></li>
+			<li><a href="/InventoryManager/Resources"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
+      <li><a href="/InventoryManager/ResourcesHistory"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
 	</section>
 	
 
@@ -35,11 +49,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 			<span class="divider"></span>
@@ -66,37 +80,37 @@
 			</ul>
 			<div class="info-data">
 				<div class="card">
-					<div class="head">
-						<li>
-							<i class='bx bxs-group' ></i>
-							<span class="text">
-								<h3>965</h3>
+				<div class="head">
+					<li>
+						<i class='bx bxs-group' ></i>
+						<span class="text">
+								<h3 th:text="${studentCount}"></h3>
 								<p>Students</p>
 							</span>
-						</li>
+					</li>
 				</div>
-				</div>
+			</div>
 				<div class="card">
 					<div class="head">
 						<li>
 							<i class='bx bxs-group' ></i>
 							<span class="text">
-								<h3>70</h3>
+								<h3 th:text="${researcherCount}"></h3>
 								<p>Researchers</p>
 							</span>
 						</li>
-				</div>
+					</div>
 				</div>
 				<div class="card">
 					<div class="head">
 						<li>
 							<i class='bx bx-devices'></i>
 							<span class="text">
-								<h3>2104</h3>
+								<h3 th:text="${itemsCount}"></h3>
 								<p>Equipments</p>
 							</span>
 						</li>
-				</div>
+					</div>
 				</div>
 			</div>
 			<div class="data">
@@ -137,7 +151,7 @@
 
 	 <!--custom js link-->
 	 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../../static/js/script.js"></script>
+	<script src="../../static/js/InventoryManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

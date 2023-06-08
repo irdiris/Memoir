@@ -1,6 +1,7 @@
 package com.example.implmentation.Controllers;
 
 import com.example.implmentation.Models.User.User;
+import com.example.implmentation.Models.User.UserRepository;
 import com.example.implmentation.Models.User.UserService;
 
 import com.example.implmentation.Security.CustomUserDetailsManager;
@@ -28,17 +29,19 @@ private final TokenGenerator tokenGenerator;
 private final CustomUserDetailsManager customUserDetailsManager;
 
 private final UserService userService;
+private final UserRepository userRepository;
 
 
 
 @Autowired
-    public UserController(PasswordEncoder passwordEncoder,  TokenGenerator tokenGenerator, CustomUserDetailsManager customUserDetailsManager, UserService userService) {
+    public UserController(PasswordEncoder passwordEncoder, TokenGenerator tokenGenerator, CustomUserDetailsManager customUserDetailsManager, UserService userService, UserRepository userRepository) {
 
 
     this.passwordEncoder = passwordEncoder;
     this.tokenGenerator = tokenGenerator;
     this.customUserDetailsManager = customUserDetailsManager;
     this.userService = userService;
+    this.userRepository = userRepository;
 }
     @PostMapping("/Register")
     public ResponseEntity<String> Register(@ModelAttribute User user) throws IOException {
@@ -51,10 +54,31 @@ private final UserService userService;
     public ModelAndView Authenticate(@ModelAttribute User user, HttpServletResponse response, HttpServletRequest request) throws IOException {
 
         UserDetails userDetails = userService.authenticate(user, request,response);
-        if (userDetails.getAuthorities().toString().contains("Student")){
-            return  new ModelAndView("forward:/View/Student");
-        }
+        String role = userDetails.getAuthorities().toString();
 
+        if (userRepository.findByUsername(user.getUsername()).get().getState().contains("Active")) {
+            if (role.contains("Researcher")) {
 
+                return new ModelAndView("forward:/Researcher/Lander");
+            }
+            if (role.contains("Student")) {
+
+                return new ModelAndView("forward:/View/Student");
+            }
+            if (role.contains("Allocation Manager")) {
+
+                return new ModelAndView("forward:/AllocationManager/AllocationManagerLander");
+            }
+            if (role.contains("Inventory Manager")) {
+
+                return new ModelAndView("forward:/InventoryManager/InventoryManagerLander");
+            }
+            if (role.contains("Admin")) {
+
+                return new ModelAndView("forward:/Admin/Lander");
+            }
+        } else {
+            return new ModelAndView("/Error");}
         return null;
-    }}
+    }
+    }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- icons link-->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
+
+	 <!-- custom css link-->
+	<link rel="stylesheet" href="../../static/css/style.css">
+	<title>Check inventory</title>
+</head>
+<body>
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic" alt=""> Smart EMS</a>
+		<ul class="side-menu">
+			<li><a href="../../../../../../../Project1/InventoryManager-InventoryState.html" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
+			<li><a href="../../../../../../../Project1/InventoryManager-ManageEquipments.html"><i class='bx bx-devices icon'></i> Manage Equipments</a></li>
+			<li><a href="../../../../../../../Project1/InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
+			<li><a href="../../../../../../../Project1/InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
+      <li><a href="../../../../../../../Project1/InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+	</section>
+	
+
+	<!-- NAVBAR -->
+	<section id="content">
+		<nav>
+			<i class='bx bx-menu toggle-sidebar' ></i>
+			<form action="#"></form>
+			<div id="toggle-btn" class="fas fa-sun"></div>
+			<div class="notif">
+				<i class="bi bi-bell-fill nav icon" id="bell"></i>
+				<ul class="notif-link">
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
+					<hr>
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
+					<hr>
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
+				</ul>
+			</div>
+			<span class="divider"></span>
+			<div class="profile">
+				<img  src="../../static/css/images/teacher3.png" alt="">
+				<ul class="profile-link">
+					<li><a href="../../../../../../../Project1/InventoryManager-ManageMyAccount.html" ><i class="bi bi-person-circle icon"></i>Update info</a></li>
+					<li><a href="#"><i class="bi bi-box-arrow-in-left"></i> Logout</a></li>
+				</ul>
+			</div>
+		</nav>
+	
+
+		
+
+		<!-- MAIN -->
+		<main>
+			<h1 class="title">Inventory</h1>
+			<ul class="snippet">
+				<li><a href="#">Home</a></li>
+				<li class="divider">/</li>
+				<li><a href="#" class="active">Inventory </a></li></ul>
+			<div class="data">
+				<div class="content-data">
+
+					<!-- data table -->
+					
+					<div class="head">
+						<h3>Inventory Details</h3>
+						</div>
+						
+					<div class="table-wrapper">
+						<table class="fl-table">
+							
+							
+							<thead>
+							<tr>
+								<th>ID</th>
+                                <th>Item ID</th>
+								<th>Inspection date</th>
+								<th>Status</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>#</td>
+                                <td>#</td>
+								<td>Content 1</td>
+								<td>Content 1</td>
+							</tr>
+							<tr>
+								<td>#</td>
+                                <td>#</td>
+                                <td>Content 2</td>
+								<td>Content 2</td>
+								
+							</tr>
+							<tr>
+								<td>#</td>
+                                <td>#</td>
+								<td>Content 3</td>
+								<td>Content 3</td>
+								
+							</tr>
+							<tr>
+								<td>#</td>
+                                <td>#</td>
+                                <td>Content 4</td>
+								<td>Content 4</td>
+								
+							</tr>
+							<tr>
+								<td>#</td>
+                                <td>#</td>
+                                <td>Content 5</td>
+								<td>Content 5</td>
+								
+							</tr>
+							</tr>
+						
+							
+							<tbody>
+						</table>
+
+					</div>
+					
+				</div>
+				
+			
+		</main>
+		
+	</section>
+	
+
+	 <!--custom js link-->
+	<script src="../../static/js/InventoryManagerJs.js"></script>
+	<script src="../../static/js/script2.js"></script>
+</body>
+</html>

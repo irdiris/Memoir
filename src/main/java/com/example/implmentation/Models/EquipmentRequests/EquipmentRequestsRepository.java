@@ -16,10 +16,14 @@ public interface EquipmentRequestsRepository extends JpaRepository<EquipmentRequ
     @Modifying
     @Transactional
     @Query( value = "delete from equipment_requests where user_id = :userId and item_id = :itemId",nativeQuery = true)
-    void deleteRequestByUserIdandItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
-   @Query( value = "select state from equipment_requests where item_id =:itemId and  user_id= :userId",nativeQuery = true)
+    void deleteRequestByUserIdAndItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
+   @Query( value = "select * from equipment_requests where item_id =:itemId and  user_id= :userId",nativeQuery = true)
     Optional<EquipmentRequests> findStateByUserIdAndItemId(@Param("userId") Long userId, @Param("itemId") String itemId);
     @Query( value = "select * from equipment_requests where  state='Expired' and user_id= :userId",nativeQuery = true)
     List<EquipmentRequests> getHistory(@Param("userId") Long userId);
+    @Query( value = "select * from equipment_requests where  state='Pending'",nativeQuery = true)
+    List<EquipmentRequests> getPending();
+    @Query( value = "select * from equipment_requests where  state='Allocated' OR  state='Expired'",nativeQuery = true)
+    List<EquipmentRequests> getAllocated();
 }
 

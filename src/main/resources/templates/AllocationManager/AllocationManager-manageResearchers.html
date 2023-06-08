@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,11 +58,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 		
@@ -108,8 +108,7 @@
 								<th>First name</th>
 								<th>Last name</th>
 								<th>Email</th>
-								<th>Adress</th>
-								<th>Speciality</th>
+								<th>Address</th>
 								<th>Facility</th>
 								<th>Position</th>
 								<th>State</th>
@@ -117,91 +116,23 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="researcher: ${researcher}">
+								<td th:text="${  researcher.getUser().getId()}" th:id="${researcher.getUser().getId()}"></td>
+								<td th:text="${  researcher.getUser().getFirstName()}" ></td>
+								<td th:text="${  researcher.getUser().getLastName}"></td>
+								<td th:text="${  researcher.getUser().getEmail()}"></td>
+								<td th:text="${  researcher.getUser().getAddress()}"></td>
+								<td th:text="${  researcher.getFacility()}"></td>
+								<td th:text="${  researcher.getPosition()}"></td>
+								<td th:text="${  researcher.getUser().getState()}"></td>
 								<td>
 									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
+										<a href="#" class="table-button3" onclick="banResearcher(this)">Ban</a>
+									 <a href="#"  onclick="deleteResearcher(this)"><i class='bx bx-trash'id="iconn"></i></a>
 									</div>
 								 </td>
 							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
+
 						
 							
 							<tbody>
@@ -218,7 +149,10 @@
 	
 
 	 <!-- custom js link-->
-	 <script src="../../static/js/script.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="../../static/js/AllocationManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
+
 </body>
 </html>

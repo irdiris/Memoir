@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,8 @@
       <li><a href="InventoryManager-Purchases.html"><i class="bi bi-receipt icon"></i> Purchases </a></li>
       <li><a href="InventoryManager-Resources.html"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
       <li><a href="InventoryManager-ResourcesHistory.html"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+	  <li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+
 </section>
 
 
@@ -36,11 +38,11 @@
         <div class="notif">
             <i class="bi bi-bell-fill nav icon" id="bell"></i>
             <ul class="notif-link">
-                <li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+                <li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
                 <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
                 <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
             </ul>
         </div>
         <span class="divider"></span>
@@ -65,51 +67,56 @@
       <div class="content-data">
 			<div class="container1">
 		
-				<form action="#">
+				<form  >
 					<div class="form first">
 						<div class="details-personal">
 		
 							<div class="fields">
 								<div class="input-field">
-									<label>ID</label>
-									<input type="text" placeholder="Enter id" required>
-								</div>
-								<div class="input-field">
 									<label>Receipt ID</label>
-									<input type="text" placeholder="Enter  Receipt id" required>
+									<select  type="text"  class="field" required >
+										<option disabled selected>Receipt Id</option>
+										<option th:id="purchases" th:each="receipt: ${receipts}" th:text="${receipt.getId()}"></option>
+									</select>
 								</div>
-								<div class="input-field">
-									<label>Serial Number</label>
-									<input type="text" placeholder="Enter serial number" required>
-								</div>
-							
+
 								<div class="input-field">
 									<label>Equipment name</label>
-									<input type="text" placeholder="Enter equipment name" required>
+									<input type="text" th:id="name" placeholder="Enter equipment name" required>
 								</div>
 								<div class="input-field">
 									<label>Type</label>
-									<input type="text" placeholder="Enter type" required>
+									<select type="text"  class="field" required >
+										<option disabled selected>Type</option>
+										<option th:id="type" th:each="category: ${categories}" th:text="${category.getName()}"></option>
+
+									</select>
 								</div>
-		
+
 								<div class="input-field">
-									<label>Location</label>
-									<input type="text" placeholder="Enter location" required>
+									<label>Service</label>
+									<input type="text" th:id="service"  placeholder="Enter Service" required>
 								</div>
                 <div class="input-field">
 									<label>Description</label>
-									<input type="text" placeholder="Enter description" required>
+									<input type="text" th:id="description" placeholder="Enter description" required>
 								</div>
 		            <div class="input-field">
 									<label>State</label>
-									<input type="text" placeholder="Enter state" required>
+						<select required type="text" th:id="state" class="field"  >
+							<option disabled selected>State</option>
+							<option>Available</option>
+							<option>Missing</option>
+							<option>Allocated</option>
+							<option>Under maintenance</option>
+							<option>Pending</option>
+						</select>
 								</div>
-		
-								
+
 							</div>
 						</div>
 		
-						<button >
+						<button type="submit"  onclick="submitForm()">
 								<span class="btnText">Save</span>
 							</button>
 						</div> 
@@ -124,7 +131,7 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
+	<script src="../../static/js/InventoryManagerJs.js"></script>
   <script src="../../static/js/script2.js"></script>
 </body>
 </html>

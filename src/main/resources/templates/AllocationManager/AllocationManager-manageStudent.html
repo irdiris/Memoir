@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,11 +58,11 @@
 			<div class="notif">
 				<i class="bi bi-bell-fill nav icon" id="bell"></i>
 				<ul class="notif-link">
-					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check</a></li>
+					<li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li> 
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
 					<hr>
-				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check</a></li>       
+				    <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
 				</ul>
 			</div>
 		
@@ -107,94 +107,29 @@
 								<th>Last name</th>
 								<th>Email</th>
 								<th>Institution</th>
-								<th>Speciality</th>
+								<th>Specialty</th>
 								<th>Level</th>
 								<th>State</th>
 								<th>Action</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
+							<tr th:each="student: ${student}">
+								<td th:text="${student.getUser().getId()}"></td>
+								<td th:text="${student.getUser().getFirstName()}"></td>
+								<td th:text="${student.getUser().getLastName()}"></td>
+								<td th:text="${student.getUser().getEmail()}"></td>
+								<td th:text="${student.getInstitution()}"></td>
+								<td th:text="${student.getSpecialty()}"></td>
+								<td th:text="${student.getLevel()}"></td>
+								<td th:text="${student.getUser().getState()}"></td>
 								<td>
 									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
+										<a href="#" class="table-button3" onclick="banStudent(this)">Ban</a>
+									 <a  href="#"  onclick="deleteStudent(this)"><i class='bx bx-trash'id="iconn"></i></a>
 									</div>
 								 </td>
 							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-										<a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<div>
-										<a href="#" class="table-button3">Ban</a>
-									 <a  href="#"><i class='bx bx-trash'id="iconn"></i></a> 
-									</div>
-								 </td>
-							</tr>
-						
 							
 							<tbody>
 						</table>
@@ -210,7 +145,8 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="../../static/js/AllocationManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

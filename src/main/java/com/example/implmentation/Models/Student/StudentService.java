@@ -40,6 +40,8 @@ public List<Items> getItemsForAllocation(){
 }
 public void requestEquipment(EquipmentRequests equipmentRequests){
         equipmentRequestsRepository.save(equipmentRequests);
+    Items item = itemsRepository.findItems(equipmentRequests.getItemId().getSerialNumber());
+    item.setState("Pending");
 }
 public List<Notifications> getNotifications(Long id){
     return notificationRepository.getNotificationsById(id.intValue());
@@ -63,11 +65,7 @@ public void UpdateProfile(Student student, String username){
     optionalStudent.get().getUser().setLastName(student.getUser().getLastName());
     optionalStudent.get().getUser().setPhone(student.getUser().getPhone());
 
-
-
-
-
-
+    studentRepository.save(optionalStudent.get());
 
 }
 }

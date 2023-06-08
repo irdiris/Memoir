@@ -36,21 +36,13 @@ public class UserService {
 
 return  userDetails;
     }
-      /*  Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken( user.getUsername(), user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        var userDetails= customUserDetailsManager.loadUserByUsername(user.getUsername());
 
-        String token  = tokenGenerator.generateToken(userDetails);
-
-        return  authentication;*/
 
     public void register(User expectedUser) throws IOException {
         if (userRepository.existsById(expectedUser.getId())) {
           System.out.println("User already exists.");
         }
         else {
-
               User user = User.builder()
                 .id(expectedUser.getId())
                 .username(expectedUser.getUsername())

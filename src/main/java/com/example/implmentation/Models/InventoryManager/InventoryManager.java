@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "InventoryManager")
 
 public class InventoryManager {
-    @OneToOne(optional = false)
+    @OneToOne(optional = false,  cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @MapsId
     @Id
     @JoinColumn(name = "id",referencedColumnName = "id")
