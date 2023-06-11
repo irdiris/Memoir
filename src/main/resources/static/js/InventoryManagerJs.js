@@ -433,119 +433,100 @@ async function TriggerInventoryCheck() {
 }
 
 function generatePDF() {
-
-
-
     // Define the styles for the report
     var styles = {
-        header: {
-            fontSize: 20,
-            bold: true,
-            alignment: 'center',
-            marginBottom: 20
-        },
-        subheader: {
-            fontSize: 16,
-            bold: true,
-            marginBottom: 10
-        },
-        sectionContent: {
-            fontSize: 12,
-            marginBottom: 10
-        }
+        header: {fontSize: 20, bold: true, alignment: 'center', marginBottom: 20},
+        subheader: { fontSize: 16, bold: true, marginBottom: 10},
+        sectionContent: {fontSize: 12,marginBottom: 10}
     };
 
     // Define the report content
     var content = [
-
+        {text: 'Constantine University 2',style: 'header'},
+        {text: 'Inventory Report', style: 'header'},
         {
-            text: 'Constantine University 2',
-            style: 'header'
-        },
-        {
-            text: 'Inventory Report',
-            style: 'header'
-        },
-        {
-            text: 'Missing section',
-            style: 'subheader'
-        },
-        {
-            text: missing,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Pending Section',
-            style: 'subheader'
-        },
-        {
-            text: pending,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Available Section',
-            style: 'subheader'
-        },
-        {
-            text: available,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Under Maintenance Section',
-            style: 'subheader'
-        },
-        {
-            text: underMaintenance,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Allocated Section',
-            style: 'subheader'
-        },
-        {
-            text: allocated,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Security Section',
-            style: 'subheader'
-        },
-        {
-            text: security,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Network Section',
-            style: 'subheader'
-        },
-        {
-            text: network,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Computers Section',
-            style: 'subheader'
-        },
-        {
-            text: computers,
-            style: 'sectionContent'
-        },
-        {
-            text: 'HPC Section',
-            style: 'subheader'
-        },
-        {
-            text: hpc,
-            style: 'sectionContent'
-        },
-        {
-            text: 'Robotics Section',
-            style: 'subheader'
-        },
-        {
-            text: robotics,
-            style: 'sectionContent'
-        }
+            table: {
+                widths: ['*', '*'],
+                body: [
+                    [{text: 'Constantine University 2',style: 'header'},
+                        {text: 'Inventory Report', style: 'header'}],
+                    [{text: 'Missing section',style: 'subheader'},
+                        {text: missing, style: 'sectionContent'}],
+                    [{text: 'Pending Section', style: 'subheader'},
+                        {text: pending, style: 'sectionContent'}],
+                    [{text: 'Available Section',style: 'subheader'},
+                        {text: available, style: 'sectionContent'}],
+                    [{text: 'Under Maintenance Section',style: 'subheader'},
+                        {text: underMaintenance,style: 'sectionContent'}],
+                    [{ text:'Allocated Section',style:'subheader'},
+                        { text: allocated, style:'sectionContent'}],
+                    [{ text:'Security Section',style:'subheader'},
+                        { text:security,style:'sectionContent'}],
+                    [{ text:'Network Section',style:'subheader'},
+                        { text:network,style:'sectionContent'}],
+                    [{ text:'Computers Section',style:'subheader'},
+                        { text:computers,style:'sectionContent'}],
+                    [{ text:'HPC Section',style:'subheader'},
+                        { text:hpc,style:'sectionContent'}],
+                    [{ text:'Robotics Section', style:'subheader'},
+                        { text:robotics,style:'sectionContent'}]
+                ],
+                borderWidth: 4,
+                layout:{
+                    hLineWidth:function(i,node){
+                        return (i===0 || i===node.table.body.length) ? 2 : 1;
+                    },
+                    vLineWidth:function(i,node){
+                        return (i===0 || i===node.table.widths.length) ? 2 : 1;
+                    },
+                    hLineColor:function(i,node){
+                        return (i===0 || i===node.table.body.length) ? '#DDEEEE' : '#DDEEEE';
+                    },
+                    vLineColor:function(i,node){
+                        return (i===0 || i===node.table.widths.length) ? '#DDEEEE' : '#DDEEEE';
+                    },
+                }
+            },
+            body:{
+                fontFamily:"'lato', sans-serif",
+            },
+            container:{
+                maxWidth:"1000px",
+                marginLeft:"auto",
+                marginRight:"auto",
+                paddingLeft:"10px",
+                paddingRight:"10px",
+            },
+            h2:{
+                fontSize:"26px",
+                margin:"20px 0",
+                textAlign:"center",
+            },
+            small:{
+                fontSize:"0.5em",
+            },
+            responsiveTable:{
+                li:{
+                    borderRadius:"3px",
+                    padding:"25px 30px",
+                    display:"flex",
+                    justifyContent:"space-between",
+                    marginBottom:"25px",
+                },
+                tableHeader:{
+                    backgroundColor:"#DDEFEF",
+                    border:"solid 1px #DDEEEE",
+                    color:"#336B6B",
+                    padding:"10px",
+                    textAlign:"left",
+                    textShadow:"1px 1px 1px #fff",
+                },
+                tableRow:{
+                    border:"solid 1px #DDEEEE",
+                    color:"#333",
+                    padding:"10px",
+                    textShadow:"1px 1px 1px #fff"}
+            },}
     ];
 
     // Create the document definition
