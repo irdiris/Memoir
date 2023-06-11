@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Table Example</title>
+</head>
+<body>
+<div class="table-wrapper">
+    <table class="fl-table">
+
+
+        <thead>
+        <tr>
+            <th>User ID</th>
+            <th>HPC ID</th>
+            <th>Date of acquisition</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="HPC:${HPCs}">
+            <td  th:text="${HPC.getResearcher().getId()}"></td>
+            <td th:text="${HPC.getItems.getSerialNumber()}"></td>
+            <td th:text="${HPC.getDateOfAcquisition()}"></td>
+            <td th:text="${HPC.getState()}"></td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+</body>
+</html>

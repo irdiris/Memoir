@@ -19,19 +19,19 @@
 	<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 	<ul class="side-menu">
 		<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History <i class='bx bx-chevron-right icon-right' ></i></a>
-		
+
 			<ul class="side-menu-dropdown">
-				<li><a href="Researcher-AllocatedEquipmentHistory.html"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
-				<li><a href="Researcher-AllocatedHPCHistory.html"><i class="bi bi-device-ssd icon"></i> Allocated <br> HPC History</a></li>
-				
+				<li><a href="#"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
+				<li><a href="/Researcher/HPCHistoryPage"><i class="bi bi-device-ssd icon"></i> Allocated <br> HPC History</a></li>
+
 			</ul>
 		</li>
-		<li><a href="Researcher-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment  </a></li>
-		<li><a href="Researcher-RequestHPC.html"><i class="bi bi-device-ssd icon"></i> Request HPC</a></li>
-		
-		
+		<li><a href="/Researcher/Request"><i class='bx bx-devices icon'></i> Request Equipment  </a></li>
+		<li><a href="/Researcher/RequestHPC"><i class="bi bi-device-ssd icon"></i> Request HPC</a></li>
+
+
 	</ul>
-	
+
 </section>
 
 
@@ -42,15 +42,13 @@
         <i class='bx bx-menu toggle-sidebar' ></i>
         <form action="#"></form>
         <div id="toggle-btn" class="fas fa-sun"></div>
-        <div class="notif">
+        <div class="notif" id="notification">
             <i class="bi bi-bell-fill nav icon" id="bell"></i>
-            <ul class="notif-link">
-                <li><a href="#" ><i class="bi bi-bell-fill icon "style="color: green;"></i>check<small>11:51</small></a></li>
-                <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li> 
-                <hr>
-                <li><a href="#"><i class="bi bi-bell-fill icon" style="color: green;"></i>check<small>11:51</small></a></li>       
-            </ul>
+			<ul class="notif-link">
+				<li th:each="notifications : ${notification}" ><i class="bi bi-bell-fill icon "style="color: green;" th:text="${notifications.getNotificationText()}" ></i> <small th:text="${notification.getExpirationDate()}"></small></li>
+				<hr>
+
+			</ul>
         </div>
     
         <span class="divider"></span>
@@ -76,17 +74,16 @@
 				<div class="content-data">
 
 					<!-- data table -->
-					
+
 					<div class="head">
 						<h3>Equipment Details</h3>
-					</div> 
+					</div>
 					<div class="table-wrapper">
 						<table class="fl-table">
-							
-							
+
+
 							<thead>
 							<tr>
-                                <th>Item ID</th>
 								<th>Serial number</th>
 								<th>Type</th>
 								<th>Description</th>
@@ -95,146 +92,42 @@
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>Content 1</td>
-								<td>
-								<a href="#popup-box" class="table-button1" >Request</a></td>
+							<tr th:each="item: ${items}"  th:id="${item.getSerialNumber()}" >
+								<td th:text="${item.getSerialNumber()}" ></td>
+								<td  th:text="${item.getCategories().getName()}"></td>
+								<td  th:text="${item.getDescription()}"></td>
+								<td  th:text="${item.getState()}"></td>
+								<td >
+									<a href="#popup-box" class="table-button1" onclick="getSerialNumber(this)" >Request</a></td>
 								<div id="popup-box" class="modal">
 									<div class="content">
 										<div class="box">
 											<div class="left"></div>
 											<div class="right">
-												<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-												<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-												<button class="btn">Send Request</button>
+												<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dateOfTaking" required/>
+												<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dateOfReturn" required/>
+												<button class="btn" onclick="sendRequest()">Send Request</button>
 											</div>
 										</div>
-									  <a href="#"
-									  class="box-close">
-										×
-									  </a>
+										<a href="#"
+										   class="box-close">
+											×
+										</a>
 									</div>
-								  </div>
-							    </td>
+								</div>
+								</td>
 							</tr>
 
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 2</td>
-								<td>Content 2</td>
-                                <td>Content 2</td>
-								<td>
-									<a href="#popup-box" class="table-button1" >Request</a></td>
-									<div id="popup-box" class="modal">
-										<div class="content">
-											<div class="box">
-												<div class="left1"></div>
-												<div class="right">
-													<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<button class="btn">Send Request</button>
-												</div>
-											</div>
-										  <a href="#"
-										  class="box-close">
-											×
-										  </a>
-										</div>
-									  </div>
-									</td>
-							</tr>
-							<tr>
-								<td>#</td>
-								<td>#</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>Content 3</td>
-								<td>
-									<a href="#popup-box" class="table-button1" >Request</a></td>
-									<div id="popup-box" class="modal">
-										<div class="content">
-											<div class="box">
-												<div class="left1"></div>
-												<div class="right">
-													<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<button class="btn">Send Request</button>
-												</div>
-											</div>
-										  <a href="#"
-										  class="box-close">
-											×
-										  </a>
-										</div>
-									  </div>
-									</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>Content 4</td>
-								<td>
-									<a href="#popup-box" class="table-button1" >Request</a></td>
-									<div id="popup-box" class="modal">
-										<div class="content">
-											<div class="box">
-												<div class="left1"></div>
-												<div class="right">
-													<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<button class="btn">Send Request</button>
-												</div>
-											</div>
-										  <a href="#"
-										  class="box-close">
-											×
-										  </a>
-										</div>
-									  </div>
-									</td>
-							</tr>
-							<tr>
-								<td>#</td>
-                                <td>#</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>Content 5</td>
-								<td>
-									<a href="#popup-box" class="table-button1" >Request</a></td>
-									<div id="popup-box" class="modal">
-										<div class="content">
-											<div class="box">
-												<div class="left1"></div>
-												<div class="right">
-													<input placeholder="Date of acquisition" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<input placeholder="Date of return" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
-													<button class="btn">Send Request</button>
-												</div>
-											</div>
-										  <a href="#"
-										  class="box-close">
-											×
-										  </a>
-										</div>
-									  </div>
-									</td>
-							</tr>
-							</tr>
-						
-							
-							<tbody>
+
+							</tbody>
+
+
 						</table>
 
 					</div>
-                </div>
 				</div>
+			</div>
+
 				
 			
 		</main>
@@ -243,7 +136,10 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
+	<script src="../../static/js/ResearcherJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", getnotification());
+</script>
 </body>
 </html>

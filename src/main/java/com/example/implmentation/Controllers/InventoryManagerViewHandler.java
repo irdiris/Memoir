@@ -1,6 +1,8 @@
 package com.example.implmentation.Controllers;
 
 import com.example.implmentation.Models.Categories.CategoryRepository;
+import com.example.implmentation.Models.InventoryCheck.InventoryCheck;
+import com.example.implmentation.Models.InventoryCheck.InventoryCheckRepository;
 import com.example.implmentation.Models.Items.Items;
 import com.example.implmentation.Models.Items.ItemsRepository;
 import com.example.implmentation.Models.Purchases.Purchases;
@@ -27,6 +29,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,12 +47,13 @@ public class InventoryManagerViewHandler {
   private final PurchasesRepository purchasesRepository;
   private  final ResourcesRepository resourcesRepository;
     private  final ResourceHistoryRepository resourceHistoryRepository;
+    private final InventoryCheckRepository inventoryCheckRepository;
 
 
 
 
     @Autowired
-    public InventoryManagerViewHandler(UserRepository userRepository, CategoryRepository categoryRepository, AuthenticationManager authenticationManager, CustomUserDetailsManager customUserDetailsManager, TokenGenerator tokenGenerator, ItemsRepository itemsRepository, PurchasesRepository purchasesRepository, ResourcesRepository resourcesRepository, ResourceHistoryRepository resourceHistoryRepository) {
+    public InventoryManagerViewHandler(UserRepository userRepository, CategoryRepository categoryRepository, AuthenticationManager authenticationManager, CustomUserDetailsManager customUserDetailsManager, TokenGenerator tokenGenerator, ItemsRepository itemsRepository, PurchasesRepository purchasesRepository, ResourcesRepository resourcesRepository, ResourceHistoryRepository resourceHistoryRepository, InventoryCheckRepository inventoryCheckRepository) {
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
         this.authenticationManager = authenticationManager;
@@ -58,6 +64,7 @@ public class InventoryManagerViewHandler {
 
         this.resourcesRepository = resourcesRepository;
         this.resourceHistoryRepository = resourceHistoryRepository;
+        this.inventoryCheckRepository = inventoryCheckRepository;
     }
     @RequestMapping("/InventoryManagerLander")
     public ModelAndView AllocationManagerLander(User user, HttpServletRequest request, HttpServletResponse response) {
@@ -202,6 +209,14 @@ public class InventoryManagerViewHandler {
         modelAndView.setViewName("/InventoryManager/InventoryManager-ResourcesHistory");
         return modelAndView;
     }
+    @GetMapping("/InventoryCheck")
+    public ModelAndView InventoryCheck(){
+        ModelAndView modelAndView= new ModelAndView();
+        modelAndView.addObject("checks", inventoryCheckRepository.findAll());
+
+        modelAndView.setViewName("/InventoryManager/InventoryManager-Check inventory");
+        return modelAndView;
+    }
     @PostMapping("/DeleteResourceH")
     public ModelAndView DeleteResourceH(HttpServletRequest request){
        resourceHistoryRepository.deleteById(Long.valueOf(request.getParameter("Id")));
@@ -212,5 +227,24 @@ public class InventoryManagerViewHandler {
         resourceHistory.setResources(resourcesRepository.findById(Long.valueOf(request.getParameter("resource"))).get());
        resourceHistoryRepository.save(resourceHistory);
         return getResourcesHistory();
+    }
+    @PostMapping("/TriggerCheck")
+    public ModelAndView TriggerCheck(@ModelAttribute ResourceHistory resourceHistory, HttpServletRequest request){
+        List<Items>  itemslist =itemsRepository.findAll();
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString = currentDate.format(formatter);
+        for (Items item: itemslist){
+            item.setState("Missing");
+            System.out.println(item.getName());
+            inventoryCheckRepository.save(InventoryCheck.builder()
+                            .item(item)
+                            .name(item.getName())
+                            .status(item.getState())
+                            .LastSeen(item.getService())
+                            .DateOfCheck(dateString)
+                    .build());
+        }
+        return InventoryCheck();
     }
 }

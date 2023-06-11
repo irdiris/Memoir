@@ -44,9 +44,9 @@ private final UserRepository userRepository;
     this.userRepository = userRepository;
 }
     @PostMapping("/Register")
-    public ResponseEntity<String> Register(@ModelAttribute User user) throws IOException {
+    public ModelAndView Register(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
      userService.register(user);
-      return  new ResponseEntity<>("User saved." ,HttpStatus.OK);
+     return  Authenticate(user,response,request);
 
     }
 
@@ -78,7 +78,11 @@ private final UserRepository userRepository;
                 return new ModelAndView("forward:/Admin/Lander");
             }
         } else {
-            return new ModelAndView("/Error");}
-        return null;
-    }
-    }
+            return new ModelAndView("forward:/Admin/Lander");
+
+    }return null;}
+    @RequestMapping("/Error")
+    public ModelAndView error(){
+     ModelAndView modelAndView= new ModelAndView("forward:/Implementation/user/Error");
+        return modelAndView;
+    }}

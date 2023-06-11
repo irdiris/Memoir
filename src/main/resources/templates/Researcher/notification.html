@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Table Example</title>
+</head>
+<body>
+<ul class="notif-link">
+    <li th:each="notifications : ${notification}" ><i class="bi bi-bell-fill icon "style="color: green;" th:text="${notifications.getNotificationText()}" ></i> <small th:text="${notification.getExpirationDate()}"></small></li>
+    <hr>
+
+</ul>
+</body>
+</html>

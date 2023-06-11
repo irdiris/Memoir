@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +29,6 @@ public class Resources {
     private String name;
     private int quantity;
 
-    @OneToOne(mappedBy = "resources")
-    private ResourceHistory resourceHistory;
+    @OneToMany(mappedBy = "resources")
+    private Set<ResourceHistory> resourceHistory;
 }

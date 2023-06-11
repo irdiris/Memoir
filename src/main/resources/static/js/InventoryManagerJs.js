@@ -404,3 +404,156 @@ function submitFormResource() {
         body: formData,
     });
 }
+async function TriggerInventoryCheck() {
+
+
+
+    // Create a new Request object.
+    const request = new Request("/InventoryManager/TriggerCheck", {
+
+        method: "POST",
+    });
+    try {
+        // Send the request.
+        const response = await fetch(request);
+
+        // Handle the response.
+        if (response.status === 200) {
+            // The request was successful.
+            console.log("The request was successful.");
+            location.reload();
+        } else {
+            // The request failed.
+            console.log("The request failed.");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+function generatePDF() {
+
+
+
+    // Define the styles for the report
+    var styles = {
+        header: {
+            fontSize: 20,
+            bold: true,
+            alignment: 'center',
+            marginBottom: 20
+        },
+        subheader: {
+            fontSize: 16,
+            bold: true,
+            marginBottom: 10
+        },
+        sectionContent: {
+            fontSize: 12,
+            marginBottom: 10
+        }
+    };
+
+    // Define the report content
+    var content = [
+
+        {
+            text: 'Constantine University 2',
+            style: 'header'
+        },
+        {
+            text: 'Inventory Report',
+            style: 'header'
+        },
+        {
+            text: 'Missing section',
+            style: 'subheader'
+        },
+        {
+            text: missing,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Pending Section',
+            style: 'subheader'
+        },
+        {
+            text: pending,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Available Section',
+            style: 'subheader'
+        },
+        {
+            text: available,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Under Maintenance Section',
+            style: 'subheader'
+        },
+        {
+            text: underMaintenance,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Allocated Section',
+            style: 'subheader'
+        },
+        {
+            text: allocated,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Security Section',
+            style: 'subheader'
+        },
+        {
+            text: security,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Network Section',
+            style: 'subheader'
+        },
+        {
+            text: network,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Computers Section',
+            style: 'subheader'
+        },
+        {
+            text: computers,
+            style: 'sectionContent'
+        },
+        {
+            text: 'HPC Section',
+            style: 'subheader'
+        },
+        {
+            text: hpc,
+            style: 'sectionContent'
+        },
+        {
+            text: 'Robotics Section',
+            style: 'subheader'
+        },
+        {
+            text: robotics,
+            style: 'sectionContent'
+        }
+    ];
+
+    // Create the document definition
+    var docDefinition = {
+        content: content,
+        styles: styles
+    };
+
+    // Create the PDF
+    pdfMake.createPdf(docDefinition).download('inventory_report.pdf');
+}

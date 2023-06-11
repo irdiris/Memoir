@@ -42,6 +42,7 @@ public void requestEquipment(EquipmentRequests equipmentRequests){
         equipmentRequestsRepository.save(equipmentRequests);
     Items item = itemsRepository.findItems(equipmentRequests.getItemId().getSerialNumber());
     item.setState("Pending");
+    itemsRepository.save(item);
 }
 public List<Notifications> getNotifications(Long id){
     return notificationRepository.getNotificationsById(id.intValue());

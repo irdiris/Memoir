@@ -27,7 +27,7 @@ public class ResourceHistory {
     private String service;
     private String dateOfAcquisition;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "resource_id")
     private Resources resources;
 }

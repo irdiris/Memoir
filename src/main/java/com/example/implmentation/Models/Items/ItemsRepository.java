@@ -12,6 +12,8 @@ public interface ItemsRepository  extends JpaRepository<Items, Long> {
 
     @Query (value = "select * from items where state='Available' and service= 'Allocation service'",nativeQuery = true)
     List<Items> findItemsForAllocating();
+    @Query (value = "select * from items where state='Available' and service= 'Allocation service' and type='HPC' ",nativeQuery = true)
+    List<Items> findHPCForAllocating();
     @Query (value = "select * from items where serial_number = :serial_number",nativeQuery = true)
     Items findItems(@Param("serial_number") String serial_number);
     @Query( value = "select count(serial_number) from items ",nativeQuery = true)

@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<script>
-		var missing = [[${missing}]];
+
+	var missing = [[${missing}]];
 		var pending = [[${pending}]];
 		var available = [[${available}]];
 		var underMaintenance = [[${underMaintenance}]];
@@ -16,10 +17,11 @@
 	</script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
      <!-- icons link-->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">    
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 	 <!-- custom css link-->
 	<link rel="stylesheet" href="../../static/css/style.css">
@@ -29,14 +31,15 @@
 	
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
+		<a href="/InventoryManager/InventoryManagerLander" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic" alt=""> Smart EMS</a>
 		<ul class="side-menu">
-			<li><a href="#" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
+			<li><a href="/InventoryManager/InventoryManagerLander" ><i class="bi bi-bar-chart-line icon"></i> Inventory State</a></li>
 			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Manage Equipments</a></li>
 			<li><a href="/InventoryManager/Purchases"><i class="bi bi-receipt icon"></i> Purchases </a></li>
 			<li><a href="/InventoryManager/Resources"><i class="bi bi-box-arrow-in-down-right icon"></i> Resources </a></li>
-      <li><a href="/InventoryManager/ResourcesHistory"><i class="bi bi-card-text icon"></i> Resources History</a></li>
-			<li><a href="/InventoryManager/Equipment"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+			<li><a href="/InventoryManager/ResourcesHistory"><i class="bi bi-card-text icon"></i> Resources History</a></li>
+			<li><a href="/InventoryManager/InventoryCheck"><i class='bx bx-devices icon'></i> Inventory Check</a></li>
+		</ul>
 	</section>
 	
 
@@ -76,7 +79,8 @@
 				<li><a href="#">Home</a></li>
 				<li class="divider">/</li>
 				<li><a href="#" class="active"> Inventory State</a></li>
-				<li ><a href="#" class="report-button">Generate report</a></li>
+				<li ><a href="#"  onclick="TriggerInventoryCheck()" class="inventory-button">Check inventory</a></li>
+				<li ><a href="#" class="report-button" onclick="generatePDF()">Generate report</a></li>
 			</ul>
 			<div class="info-data">
 				<div class="card">
@@ -147,11 +151,16 @@
 			</div>
 		</main>
 	</section>
-	
 
-	 <!--custom js link-->
-	 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../../static/js/InventoryManagerJs.js"></script>
+
+	<!-- Include jsPDF library first -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+
+	<!-- Then include your custom JavaScript files -->
+	<script src="../../static/js/ApexJs.js"></script>
+	<script  src="../../static/js/InventoryManagerJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 </body>
 </html>

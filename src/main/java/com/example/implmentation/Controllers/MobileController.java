@@ -8,7 +8,7 @@ import com.example.implmentation.Models.MobileLogin;
 import com.example.implmentation.Models.User.UserRepository;
 import com.example.implmentation.Models.User.UserService;
 import com.example.implmentation.Security.CustomUserDetailsManager;
-import com.google.gson.Gson;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

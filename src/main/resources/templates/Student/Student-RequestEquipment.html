@@ -85,7 +85,9 @@
 							<tr th:each="item: ${items}"  th:id="${item.getSerialNumber()}" >
 								<td th:text="${item.getSerialNumber()}" ></td>
 								<td  th:text="${item.getCategories().getName()}"></td>
-								<td  th:text="${item.getDescription()}"></td>
+								<td  th:text="${item.getDescription()}" style="  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;"></td>
 								<td  th:text="${item.getState()}"></td>
 								<td >
 								<a href="#popup-box" class="table-button1" onclick="getSerialNumber(this)" >Request</a></td>

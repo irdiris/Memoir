@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,25 +16,24 @@
 	<title>Request HPC</title>
 </head>
 <body>
-	
-<!-- SIDEBAR -->
+
 <section id="sidebar">
 	<a href="#" class="logo"><img src="../../static/css/images/logo.png" class="logo-pic"> Smart EMS</a>
 	<ul class="side-menu">
 		<li><a href="#"><i class="bi bi-calendar2-event icon"></i> Allocation History <i class='bx bx-chevron-right icon-right' ></i></a>
-		
+
 			<ul class="side-menu-dropdown">
-				<li><a href="Researcher-AllocatedEquipmentHistory.html"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
-				<li><a href="Researcher-AllocatedHPCHistory.html"><i class="bi bi-device-ssd icon"></i> Allocated <br> HPC History</a></li>
-				
+				<li><a href="#"><i class='bx bx-devices icon'></i> Allocated <br> Equipment <br> History</a></li>
+				<li><a href="/Researcher/HPCHistoryPage"><i class="bi bi-device-ssd icon"></i> Allocated <br> HPC History</a></li>
+
 			</ul>
 		</li>
-		<li><a href="Researcher-RequestEquipment.html"><i class='bx bx-devices icon'></i> Request Equipment  </a></li>
-		<li><a href="Researcher-RequestHPC.html"><i class="bi bi-device-ssd icon"></i> Request HPC</a></li>
-		
-		
+		<li><a href="/Researcher/Request"><i class='bx bx-devices icon'></i> Request Equipment  </a></li>
+		<li><a href="/Researcher/RequestHPC"><i class="bi bi-device-ssd icon"></i> Request HPC</a></li>
+
+
 	</ul>
-	
+
 </section>
 
 
@@ -90,7 +89,7 @@
 								
 								<thead>
 								<tr>
-									<th>HPC ID</th>
+
 									<th>Serial number</th>
 									<th>Type</th>
 									<th>Description</th>
@@ -99,14 +98,13 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<td>#</td>
-									<td>#</td>
-									<td>Content 1</td>
-									<td>Content 1</td>
-									<td>Content 1</td>
+								<tr th:each="HPC :${hpclist}" th:id="${HPC.getSerialNumber()}" >
+									<td th:text="${HPC.getSerialNumber()}"></td>
+									<td th:text="${HPC.getName()}"></td>
+									<td th:text="${HPC.getDescription()}"></td>
+									<td th:text="${HPC.getState()}"></td>
 									<td>
-										<a href="#popup-box" class="table-button1" >Request</a></td>
+										<a href="#popup-box" class="table-button1" onclick="getSerialNumber(this)" >Request</a></td>
 										<div id="popup-box" class="modal">
 											<div class="content1">
 												<div class="box">
@@ -133,9 +131,9 @@
 													 
 													<div class="right">
 														<h3>Pick available date & time</h3>
-														<input placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
+														<input  placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" required/>
 														
-														<button class="btn">Send Request</button>
+														<button class="btn" onclick="sendRequestHPC()">Send Request</button>
 													</div>
 												</div>
 											  <a href="#"
@@ -144,205 +142,8 @@
 											  </a>
 											</div>
 										  </div>
-									</td>
-									
-								</tr>
-								<tr>
-									<td>#</td>
-									<td>#</td>
-									<td>Content 2</td>
-									<td>Content 2</td>
-									<td>Content 2</td>
-									<td>
-										<a href="#popup-box" class="table-button1" >Request</a></td>
-										<div id="popup-box" class="modal">
-											<div class="content1">
-												<div class="box">
-														<div class="calendar">
-														  <div class="month">
-															<i class="fas fa-angle-left prev" style="color: white;"></i>
-															<div class="date">
-															  <h1></h1>
-															  <p></p>
-															</div>
-															<i class="fas fa-angle-right next" style="color: white;"></i>
-														  </div>
-														  <div class="weekdays">
-															<div>Sun</div>
-															<div>Mon</div>
-															<div>Tue</div>
-															<div>Wed</div>
-															<div>Thu</div>
-															<div>Fri</div>
-															<div>Sat</div>
-														  </div>
-														  <div class="days"></div>
-														</div>
-													 
-													<div class="right">
-														<h3>Pick available date & time</h3>
-														<input placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" id="datetime-local" required/>
-														
-														<button class="btn">Send Request</button>
-													</div>
-												</div>
-											  <a href="#"
-											  class="box-close">
-												×
-											  </a>
-											</div>
-										  </div>
-										</td>
-									
-								</tr>
-								<tr>
-									<td>#</td>
-									<td>#</td>
-									<td>Content 3</td>
-									<td>Content 3</td>
-									<td>Content 3</td>
-									<td>
-										<a href="#popup-box" class="table-button1" >Request</a></td>
-										<div id="popup-box" class="modal">
-											<div class="content1">
-												<div class="box">
-														<div class="calendar">
-														  <div class="month">
-															<i class="fas fa-angle-left prev" style="color: white;"></i>
-															<div class="date">
-															  <h1></h1>
-															  <p></p>
-															</div>
-															<i class="fas fa-angle-right next" style="color: white;"></i>
-														  </div>
-														  <div class="weekdays">
-															<div>Sun</div>
-															<div>Mon</div>
-															<div>Tue</div>
-															<div>Wed</div>
-															<div>Thu</div>
-															<div>Fri</div>
-															<div>Sat</div>
-														  </div>
-														  <div class="days"></div>
-														</div>
-													 
-													<div class="right">
-														<h3>Pick available date & time</h3>
-														<input placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" id="datetime-local" required/>
-														
-														<button class="btn">Send Request</button>
-													</div>
-												</div>
-											  <a href="#"
-											  class="box-close">
-												×
-											  </a>
-											</div>
-										  </div>
-										</td>
-									
-								</tr>
-								<tr>
-									<td>#</td>
-									<td>#</td>
-									<td>Content 4</td>
-									<td>Content 4</td>
-									<td>Content 4</td>
-									<td>
-										<a href="#popup-box" class="table-button1" >Request</a></td>
-										<div id="popup-box" class="modal">
-											<div class="content1">
-												<div class="box">
-														<div class="calendar">
-														  <div class="month">
-															<i class="fas fa-angle-left prev" style="color: white;"></i>
-															<div class="date">
-															  <h1></h1>
-															  <p></p>
-															</div>
-															<i class="fas fa-angle-right next" style="color: white;"></i>
-														  </div>
-														  <div class="weekdays">
-															<div>Sun</div>
-															<div>Mon</div>
-															<div>Tue</div>
-															<div>Wed</div>
-															<div>Thu</div>
-															<div>Fri</div>
-															<div>Sat</div>
-														  </div>
-														  <div class="days"></div>
-														</div>
-													 
-													<div class="right">
-														<h3>Pick available date & time</h3>
-														<input placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" id="datetime-local" required/>
-														
-														<button class="btn">Send Request</button>
-													</div>
-												</div>
-											  <a href="#"
-											  class="box-close">
-												×
-											  </a>
-											</div>
-										  </div>
-										</td>
-									
-								</tr>
-								<tr>
-									<td>#</td>
-									<td>#</td>
-									<td>Content 5</td>
-									<td>Content 5</td>
-									<td>Content 5</td>
-									<td>
-										<a href="#popup-box" class="table-button1" >Request</a></td>
-										<div id="popup-box" class="modal">
-											<div class="content1">
-												<div class="box">
-														<div class="calendar">
-														  <div class="month">
-															<i class="fas fa-angle-left prev" style="color: white;"></i>
-															<div class="date">
-															  <h1></h1>
-															  <p></p>
-															</div>
-															<i class="fas fa-angle-right next" style="color: white;"></i>
-														  </div>
-														  <div class="weekdays">
-															<div>Sun</div>
-															<div>Mon</div>
-															<div>Tue</div>
-															<div>Wed</div>
-															<div>Thu</div>
-															<div>Fri</div>
-															<div>Sat</div>
-														  </div>
-														  <div class="days"></div>
-														</div>
-													 
-													<div class="right">
-														<h2>Pick available date & time</h2>
-														<input placeholder="Date & time of reservation" class="field" type="text" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" id="datetime-local" required/>
-														
-														<button class="btn">Send Request</button>
-													</div>
-												</div>
-											  <a href="#"
-											  class="box-close">
-												×
-											  </a>
-											</div>
-										  </div>
-										</td>
-									
-								</tr>
-								</tr>
-							
-								
-								<tbody>
+									</tr>
+								</tbody>
 							</table>
 	
 						</div>
@@ -356,7 +157,7 @@
 	
 
 	 <!--custom js link-->
-	<script src="../../static/js/script.js"></script>
+	<script src="../../static/js/ResearcherJs.js"></script>
 	<script src="../../static/js/script2.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
